@@ -1,0 +1,32 @@
+---
+export interface Props {
+  title?: string;
+}
+const { title = 'SocraticBTC' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="Bitcoin Core PR Reviews & Optech Newsletters — Korean translations powered by Claude AI" />
+  </head>
+  <body class="bg-base text-gray-100 min-h-screen font-sans">
+    <header class="border-b border-border sticky top-0 bg-base z-10">
+      <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+        <span class="text-btc text-xl font-bold">₿</span>
+        <a href="/" class="text-lg font-semibold tracking-tight hover:text-btc transition-colors">SocraticBTC</a>
+        <span class="text-gray-500 text-sm ml-auto">Bitcoin 기술 콘텐츠 한국어 번역</span>
+      </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <footer class="border-t border-border mt-16">
+      <div class="max-w-5xl mx-auto px-4 py-6 text-gray-500 text-sm text-center">
+        번역: Claude AI (claude-haiku-4-5) · 데이터: Bitcoin Core Reviews + Optech Newsletter
+      </div>
+    </footer>
+  </body>
+</html>

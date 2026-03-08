@@ -1,10 +1,10 @@
-"""LLM-based translation pipeline using OpenAI API."""
+"""LLM-based translation pipeline using Anthropic Claude API."""
 
 import json
 import os
 from pathlib import Path
 
-from openai import OpenAI
+import anthropic
 from rich.console import Console
 
 console = Console()
@@ -18,11 +18,12 @@ SYSTEM_PROMPT = (
 )
 
 
-def translate_content(source: str) -> list[dict]:
-    """Translate scraped content to Korean using OpenAI API.
+def translate_content(source: str, limit: int = 1) -> list[dict]:
+    """Translate scraped content to Korean using Anthropic Claude API.
 
     Args:
         source: Either 'reviews' or 'optech'.
+        limit: Maximum number of items to translate (default 1 for testing).
 
     Returns:
         List of translated items.
@@ -32,51 +33,52 @@ def translate_content(source: str) -> list[dict]:
         console.print(f"[red]No data found at {input_path}. Run scrape first.[/]")
         return []
 
-    items = json.loads(input_path.read_text(encoding="utf-8"))
-    api_key = os.environ.get("OPENAI_API_KEY")
+    all_items = json.loads(input_path.read_text(encoding="utf-8"))
+    items = all_items[:limit]
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
 
     if not api_key:
-        console.print("[yellow]OPENAI_API_KEY not set. Saving stub translations.[/]")
+        console.print("[yellow]ANTHROPIC_API_KEY not set. Saving stub translations.[/]")
         results = []
         for item in items:
             results.append({
                 "title": item["title"],
                 "url": item["url"],
                 "translated_title": f"[STUB] {item['title']}",
-                "translated_content": "[STUB] Translation requires OPENAI_API_KEY.",
+                "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY.",
             })
         _save(source, results)
         return results
 
-    client = OpenAI(api_key=api_key)
+    client = anthropic.Anthropic(api_key=api_key)
     results = []
 
     for item in items:
         console.print(f"  Translating: {item['title'][:60]}...")
         try:
             # Translate title
-            title_resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+            title_resp = client.messages.create(
+                model="claude-haiku-4-5",
+                max_tokens=200,
+                system=SYSTEM_PROMPT,
                 messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": f"Translate this title:\n{item['title']}"},
                 ],
-                max_tokens=200,
             )
-            translated_title = title_resp.choices[0].message.content.strip()
+            translated_title = title_resp.content[0].text.strip()
 
             # Translate content (chunked if needed)
             content = item.get("content", "")
             if content:
-                content_resp = client.chat.completions.create(
-                    model="gpt-4o-mini",
+                content_resp = client.messages.create(
+                    model="claude-haiku-4-5",
+                    max_tokens=4000,
+                    system=SYSTEM_PROMPT,
                     messages=[
-                        {"role": "system", "content": SYSTEM_PROMPT},
                         {"role": "user", "content": f"Translate:\n{content[:4000]}"},
                     ],
-                    max_tokens=4000,
                 )
-                translated_content = content_resp.choices[0].message.content.strip()
+                translated_content = content_resp.content[0].text.strip()
             else:
                 translated_content = ""
 

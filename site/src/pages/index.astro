@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { readFileSync, existsSync } from 'fs';
+import { resolve } from 'path';
+
+const dataDir = resolve(process.cwd(), '../data');
+
+function loadJson(filename: string): any[] {
+  const p = resolve(dataDir, filename);
+  if (!existsSync(p)) return [];
+  return JSON.parse(readFileSync(p, 'utf-8'));
+}
+
+const reviews = loadJson('reviews.json');
+const reviewsKo = loadJson('reviews_ko.json');
+const optech = loadJson('optech.json');
+const optechKo = loadJson('optech_ko.json');
+
+// Build translation lookup by URL
+const reviewsKoMap = Object.fromEntries(reviewsKo.map((r: any) => [r.url, r]));
+const optechKoMap = Object.fromEntries(optechKo.map((r: any) => [r.url, r]));
+
+// Merge: for each item, attach translation if available
+const reviewItems = reviews.map((item: any, i: number) => ({
+  ...item,
+  ko: reviewsKoMap[item.url] ?? null,
+  id: i,
+}));
+
+const optechItems = optech.map((item: any, i: number) => ({
+  ...item,
+  ko: optechKoMap[item.url] ?? null,
+  id: i,
+}));
+
+const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
+---
+
+<BaseLayout title="SocraticBTC — Bitcoin 기술 콘텐츠 한국어 번역">
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold mb-1">
+      <span class="text-btc">₿</span> SocraticBTC
+    </h1>
+    <p class="text-gray-400 text-sm">Bitcoin Core PR Review Club & Optech Newsletter 한국어 번역</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="flex gap-1 mb-6 border-b border-border">
+    <a
+      href="/?tab=reviews"
+      class={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${
+        tab === 'reviews'
+          ? 'text-btc border-b-2 border-btc -mb-px'
+          : 'text-gray-400 hover:text-gray-200'
+      }`}
+    >
+      📝 PR Reviews
+      <span class="ml-1 text-xs text-gray-500">({reviewItems.length})</span>
+    </a>
+    <a
+      href="/?tab=optech"
+      class={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${
+        tab === 'optech'
+          ? 'text-btc border-b-2 border-btc -mb-px'
+          : 'text-gray-400 hover:text-gray-200'
+      }`}
+    >
+      📰 Optech Newsletters
+      <span class="ml-1 text-xs text-gray-500">({optechItems.length})</span>
+    </a>
+  </div>
+
+  <!-- Stats bar -->
+  {tab === 'reviews' && (
+    <div class="flex gap-4 mb-5 text-xs text-gray-500">
+      <span>총 {reviewItems.length}건</span>
+      <span>번역 완료: {reviewItems.filter((r: any) => r.ko && !r.ko.translated_title?.startsWith('[STUB]')).length}건</span>
+      <span>Stub: {reviewItems.filter((r: any) => r.ko?.translated_title?.startsWith('[STUB]')).length}건</span>
+    </div>
+  )}
+  {tab === 'optech' && (
+    <div class="flex gap-4 mb-5 text-xs text-gray-500">
+      <span>총 {optechItems.length}건</span>
+      <span>번역 완료: {optechItems.filter((r: any) => r.ko && !r.ko.translated_title?.startsWith('[STUB]')).length}건</span>
+      <span>Stub: {optechItems.filter((r: any) => r.ko?.translated_title?.startsWith('[STUB]')).length}건</span>
+    </div>
+  )}
+
+  <!-- Card list -->
+  {tab === 'reviews' && (
+    <div class="grid gap-3">
+      {reviewItems.map((item: any) => (
+        <ContentCard
+          title={item.title}
+          translatedTitle={item.ko?.translated_title}
+          url={item.url}
+          isTranslated={!!item.ko && !item.ko.translated_title?.startsWith('[STUB]')}
+          href={`/reviews/${item.id}`}
+        />
+      ))}
+      {reviewItems.length === 0 && (
+        <p class="text-gray-500 text-sm py-8 text-center">데이터 없음 — scrape 먼저 실행하세요</p>
+      )}
+    </div>
+  )}
+
+  {tab === 'optech' && (
+    <div class="grid gap-3">
+      {optechItems.map((item: any) => (
+        <ContentCard
+          title={item.title}
+          translatedTitle={item.ko?.translated_title}
+          url={item.url}
+          isTranslated={!!item.ko && !item.ko.translated_title?.startsWith('[STUB]')}
+          href={`/newsletter/${item.id}`}
+        />
+      ))}
+      {optechItems.length === 0 && (
+        <p class="text-gray-500 text-sm py-8 text-center">데이터 없음 — scrape 먼저 실행하세요</p>
+      )}
+    </div>
+  )}
+</BaseLayout>

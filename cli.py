@@ -39,10 +39,11 @@ def scrape(source: str, limit: int):
     required=True,
     help="Source to translate.",
 )
-def translate(source: str):
+@click.option("--limit", default=1, help="Number of items to translate (default 1 for testing).")
+def translate(source: str, limit: int):
     """Translate scraped content to Korean."""
-    console.print(f"[bold]Translating: {source}[/]")
-    translate_content(source)
+    console.print(f"[bold]Translating: {source} (limit={limit})[/]")
+    translate_content(source, limit=limit)
 
 
 @cli.command()
@@ -52,8 +53,8 @@ def all(limit: int):
     console.print("[bold]Running full pipeline...[/]")
     scrape_reviews(limit=limit)
     scrape_optech(limit=limit)
-    translate_content("reviews")
-    translate_content("optech")
+    translate_content("reviews", limit=limit)
+    translate_content("optech", limit=limit)
     console.print("[bold green]Full pipeline complete.[/]")
 
 
