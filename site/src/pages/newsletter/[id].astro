@@ -1,27 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import optechRaw from '../../data/optech.json';
+import optechKoRaw from '../../data/optech_ko.json';
 
 export async function getStaticPaths() {
-  const dataDir = resolve(process.cwd(), '../data');
-  const optechPath = resolve(dataDir, 'optech.json');
-  if (!existsSync(optechPath)) return [];
-  const optech = JSON.parse(readFileSync(optechPath, 'utf-8'));
+  const optech: any[] = optechRaw;
   return optech.map((_: any, i: number) => ({ params: { id: String(i) } }));
 }
 
 const { id } = Astro.params;
-const dataDir = resolve(process.cwd(), '../data');
 
-function loadJson(filename: string): any[] {
-  const p = resolve(dataDir, filename);
-  if (!existsSync(p)) return [];
-  return JSON.parse(readFileSync(p, 'utf-8'));
-}
-
-const optech = loadJson('optech.json');
-const optechKo = loadJson('optech_ko.json');
+const optech: any[] = optechRaw;
+const optechKo: any[] = optechKoRaw;
 
 const item = optech[Number(id)];
 const koMap = Object.fromEntries(optechKo.map((r: any) => [r.url, r]));

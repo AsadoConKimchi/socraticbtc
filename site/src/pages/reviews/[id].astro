@@ -1,27 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import reviewsRaw from '../../data/reviews.json';
+import reviewsKoRaw from '../../data/reviews_ko.json';
 
 export async function getStaticPaths() {
-  const dataDir = resolve(process.cwd(), '../data');
-  const reviewsPath = resolve(dataDir, 'reviews.json');
-  if (!existsSync(reviewsPath)) return [];
-  const reviews = JSON.parse(readFileSync(reviewsPath, 'utf-8'));
+  const reviews: any[] = reviewsRaw;
   return reviews.map((_: any, i: number) => ({ params: { id: String(i) } }));
 }
 
 const { id } = Astro.params;
-const dataDir = resolve(process.cwd(), '../data');
 
-function loadJson(filename: string): any[] {
-  const p = resolve(dataDir, filename);
-  if (!existsSync(p)) return [];
-  return JSON.parse(readFileSync(p, 'utf-8'));
-}
-
-const reviews = loadJson('reviews.json');
-const reviewsKo = loadJson('reviews_ko.json');
+const reviews: any[] = reviewsRaw;
+const reviewsKo: any[] = reviewsKoRaw;
 
 const item = reviews[Number(id)];
 const koMap = Object.fromEntries(reviewsKo.map((r: any) => [r.url, r]));

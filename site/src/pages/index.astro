@@ -1,21 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContentCard from '../components/ContentCard.astro';
-import { readFileSync, existsSync } from 'fs';
-import { resolve } from 'path';
+import reviewsRaw from '../data/reviews.json';
+import reviewsKoRaw from '../data/reviews_ko.json';
+import optechRaw from '../data/optech.json';
+import optechKoRaw from '../data/optech_ko.json';
 
-const dataDir = resolve(process.cwd(), '../data');
-
-function loadJson(filename: string): any[] {
-  const p = resolve(dataDir, filename);
-  if (!existsSync(p)) return [];
-  return JSON.parse(readFileSync(p, 'utf-8'));
-}
-
-const reviews = loadJson('reviews.json');
-const reviewsKo = loadJson('reviews_ko.json');
-const optech = loadJson('optech.json');
-const optechKo = loadJson('optech_ko.json');
+const reviews: any[] = reviewsRaw;
+const reviewsKo: any[] = reviewsKoRaw;
+const optech: any[] = optechRaw;
+const optechKo: any[] = optechKoRaw;
 
 // Build translation lookup by URL
 const reviewsKoMap = Object.fromEntries(reviewsKo.map((r: any) => [r.url, r]));

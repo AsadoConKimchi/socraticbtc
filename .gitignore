@@ -10,5 +10,8 @@ venv/
 env/
 .env
 *.json
+!data/*.json
+!site/src/data/*.json
+!vercel.json
 !data/.gitkeep
 .DS_Store
