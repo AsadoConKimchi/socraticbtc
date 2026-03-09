@@ -2,7 +2,31 @@
   {
     "title": "Bitcoin Optech Newsletter #395",
     "url": "https://bitcoinops.org/en/newsletters/2026/03/06/",
-    "translated_title": "[STUB] Bitcoin Optech Newsletter #395",
-    "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY."
+    "translated_title": "비트코인 Optech 뉴스레터 #395",
+    "translated_content": "비트코인 Optech 뉴스레터 #395\n2026년 3월 6일\n\n이번 주 뉴스레터에서는 다양한 Ark 구현체 간 VTXO 검증을 위한 표준과, 블록 헤더의 nVersion 필드에서 채굴자가 사용할 수 있는 논스 공간을 확장하는 BIP 초안을 다룹니다. 또한 합의 변경에 관한 논의, 새 릴리스 및 릴리스 후보 발표, 주요 비트코인 인프라 소프트웨어의 주목할 변경 사항 요약을 포함합니다.\n\n**뉴스**\n\n● **상태 비저장 VTXO 검증 표준**: Jgmcalpine이 Delving Bitcoin에 V-PACK에 대한 제안을 게시했습니다. V-PACK은 Ark 생태계에서 VTXO를 독립적으로 검증하고 시각화하는 메커니즘을 제공하는 상태 비저장 VTXO 검증 표준입니다. 목표는 하드웨어 지갑과 같은 임베디드 환경에서 실행 가능한 경량 검증자를 개발하여 오프체인 상태를 감사하고 단방향 종료에 필요한 데이터의 독립적 백업을 유지하는 것입니다.\n\n● **채굴자를 위한 확장된 nVersion 논스 공간 BIP 초안**: Matt Corallo가 Bitcoin-Dev 메일링 리스트에 채굴자를 위한 nVersion 논스 공간의 비트 수를 16비트에서 24비트로 늘리는 BIP 초안을 게시했습니다. 이는 초당 1회 이상 nTime을 롤링하지 않고도 헤더 전용 채굴을 위한 더 많은 블록 후보를 가능하게 하며 BIP320을 대체할 것입니다.\n\n**합의 변경**\n\n● **OP_TEMPLATEHASH-CSFS-IK 지원을 위한 표준 도구 확장**: Antoine Poinsot가 taproot 네이티브 OP_TEMPLATEHASH 소프트 포크 제안을 miniscript와 PSBT에 통합하는 예비 작업에 대해 Bitcoin-Dev 메일링 리스트에 작성했습니다.\n\n● **Hourglass V2 업데이트**: Mike Casey가 양자 공격에 따른 시장 영향을 완화하기 위한 Hourglass 프로토콜 업데이트를 Bitcoin-Dev 메일링 리스트에 게시했습니다. 이 소프트 포크는 단일 블록에서 소비할 수 있는 P2PK로 잠긴 비트코인의 총 가치를 1개 출력과 1 BTC로 제한합니다.\n\n● **비트코인의 알고리즘 유연성**: Ethan Heilman이 Bitcoin에서 RFC7696 암호화 알고리즘 유연성의 잠재적 필요성에 대해 Bitcoin-Dev 메일링 리스트에 작성했습니다."
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #394",
+    "url": "https://bitcoinops.org/en/newsletters/2026/02/27/",
+    "translated_title": "비트코인 Optech 뉴스레터 #394",
+    "translated_content": "비트코인 Optech 뉴스레터 #394\n2026년 2월 27일\n\n이번 주 뉴스레터에서는 출력 스크립트 디스크립터에 보충 정보를 포함하기 위한 BIP 제안을 살펴봅니다. 또한 Bitcoin Stack Exchange의 인기 질문 요약, 새 릴리스 및 릴리스 후보 발표, 최근 주요 비트코인 인프라 소프트웨어의 변경 사항을 설명합니다.\n\n**뉴스**\n\n● **출력 스크립트 디스크립터 어노테이션을 위한 BIP 초안**: Craig Raw가 Bitcoin-Dev 메일링 리스트에 BIP392(뉴스레터 #387 참조) 논의 중 제기된 피드백을 해결하기 위한 새 BIP 아이디어를 게시했습니다. 지갑 생일을 블록 높이로 표현하는 등의 메타데이터는 사일런트 페이먼트 스캐닝을 더 효율적으로 만들 수 있습니다. Raw의 BIP는 URL과 유사한 쿼리 구분자를 사용하여 디스크립터 문자열에 직접 키/값 쌍으로 표현된 어노테이션 형태로 유용한 메타데이터를 제공할 것을 제안합니다.\n\n세 가지 초기 어노테이션 키:\n- bh (블록 높이): 지갑이 첫 자금을 받은 블록 높이\n- gl (갭 한계): 중단하기 전에 파생할 미사용 주소 수\n- ml (최대 레이블): 스캔할 최대 레이블 인덱스\n\n**Bitcoin Stack Exchange 선택 Q&A**\n\n● **Bitcoin BIP324 v2 P2P 전송은 랜덤 트래픽과 구별 가능한가?**: Pieter Wuille는 BIP324의 v2 암호화 전송 프로토콜이 트래픽 패턴 형성을 지원하지만 현재 구현된 소프트웨어가 없다고 지적합니다.\n\n● **채굴자가 헤더만 브로드캐스트하고 블록을 주지 않으면?**: User bigjosh는 채굴자가 P2P 네트워크에서 블록 헤더를 받은 후 블록 내용을 받기 전에 그 위에 빈 블록을 채굴할 수 있다고 설명합니다.\n\n**릴리스 및 릴리스 후보**\n\n● Bitcoin Core 28.4rc1 - 이전 주요 릴리스 시리즈의 유지 관리 릴리스 후보\n● Rust Bitcoin 0.33.0-beta - 300개 이상의 커밋이 있는 대규모 업데이트"
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #393",
+    "url": "https://bitcoinops.org/en/newsletters/2026/02/20/",
+    "translated_title": "비트코인 Optech 뉴스레터 #393",
+    "translated_content": "비트코인 Optech 뉴스레터 #393\n2026년 2월 20일\n\n이번 주 뉴스레터에서는 최근 OP_RETURN 사용에 대한 논의를 요약하고, 합의 변경 없이 covenant와 유사한 지출 조건을 적용하는 프로토콜을 설명합니다.\n\n**뉴스**\n\n● **최근 OP_RETURN 출력 통계**: Anthony Towns가 2025년 10월 10일 Bitcoin Core v30.0 릴리스(OP_RETURN 출력에 대한 mempool 정책 한계 변경 포함) 이후의 최근 OP_RETURN 통계에 대해 Delving에 게시했습니다. 블록 높이 915800~936000 범위:\n  - OP_RETURN 출력이 있는 트랜잭션: 24,362,310개\n  - 여러 OP_RETURN 출력이 있는 트랜잭션: 61개\n  - 총 OP_RETURN 출력 스크립트 데이터: 473,815,552바이트\n  - OP_RETURN 출력으로 사트 소각: 34,283개 트랜잭션, 총 1,463,488 sat\n\n● **Bitcoin PIPEs v2**: Misha Komarov가 Delving Bitcoin에 합의 변경이나 낙관적 챌린지 메커니즘 없이 지출 조건을 적용할 수 있는 Bitcoin PIPEs 프로토콜에 대해 게시했습니다.\n\nBitcoin PIPEs의 두 가지 주요 단계:\n- **설정(Setup)**: 표준 Bitcoin 키쌍 (sk, pk) 생성. sk는 지출 조건 문장을 사용한 증인 암호화로 암호화됨\n- **서명(Signing)**: 조건이 충족되면 sk가 공개되고 schnorr 서명 생성 가능, 그렇지 않으면 sk 복구가 계산적으로 불가능\n\n**서비스 및 클라이언트 소프트웨어 변경 사항**\n\n● Second가 hArk 기반 Ark 소프트웨어 릴리스\n● Amboss가 RailsX 발표: LN과 Taproot Assets를 사용하는 플랫폼\n● Nunchuk이 사일런트 페이먼트 지원 추가\n● Electrum이 서브마린 스왑 기능 추가"
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #392",
+    "url": "https://bitcoinops.org/en/newsletters/2026/02/13/",
+    "translated_title": "비트코인 Optech 뉴스레터 #392",
+    "translated_content": "비트코인 Optech 뉴스레터 #392\n2026년 2월 13일\n\n이번 주 뉴스레터에서는 사일런트 페이먼트 스캐닝 성능 최악의 경우를 개선하는 논의를 요약하고, 단일 키에서 많은 지출 조건을 가능하게 하는 아이디어를 설명합니다.\n\n**뉴스**\n\n● **그룹당 사일런트 페이먼트 수신자 수 제한 제안**: Sebastian Falbesoner가 Bitcoin-Dev 메일링 리스트에 사일런트 페이먼트 수신자에 대한 이론적 공격의 발견과 완화를 게시했습니다. 공격자가 현재 합의 규칙에 따른 최대 23,255개의 taproot 출력을 가진 트랜잭션을 구성하면 처리에 수분이 걸릴 수 있습니다.\n\n새 매개변수 K_max를 추가하여 단일 트랜잭션 내 그룹당 수신자 수를 제한하는 완화책을 제안합니다. Falbesoner는 K_max=1000을 제안합니다.\n\n● **BLISK (Boolean circuit Logic Integrated into the Single Key)**: Oleksandr Kurbatov가 Delving Bitcoin에 불리언 논리를 사용하여 복잡한 인증 정책을 표현하도록 설계된 BLISK 프로토콜에 대해 게시했습니다.\n\nBLISK는 단일 서명 검증 키로 회로를 해결합니다:\n- AND 게이트: n-of-n 다중서명 설정 적용\n- OR 게이트: ECDH와 같은 키 동의 프로토콜 활용\n- 단일 Schnorr 서명만 검증 필요\n\n**릴리스 및 릴리스 후보**\n\n● Bitcoin Core 29.3 - 지갑 마이그레이션 수정 및 레거시 스크립트의 이차 서명 해싱 영향 감소 등을 포함한 유지 관리 릴리스\n● LDK 0.2.2 - LN 지원 애플리케이션 개발을 위한 라이브러리 유지 관리 릴리스\n● HWI 3.2.0 - Jade Plus 및 BitBox02 Nova 디바이스 지원 추가"
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #391",
+    "url": "https://bitcoinops.org/en/newsletters/2026/02/06/",
+    "translated_title": "비트코인 Optech 뉴스레터 #391",
+    "translated_content": "비트코인 Optech 뉴스레터 #391\n2026년 2월 6일\n\n이번 주 뉴스레터에서는 상수 시간 병렬 UTXO 데이터베이스 작업, Bitcoin Script 작성을 위한 새로운 고수준 언어, 먼지 공격 완화 아이디어를 다룹니다.\n\n**뉴스**\n\n● **상수 시간 병렬 UTXO 데이터베이스**: Toby Sharp가 Delving Bitcoin에 상수 시간 쿼리가 가능한 맞춤형 고도 병렬 UTXO 데이터베이스인 Hornet UTXO(1)에 대해 게시했습니다. 이 새 데이터베이스는 잠금 없는 고도 동시성 아키텍처를 통해 초기 블록 다운로드(IBD)를 개선하는 것을 목표로 합니다.\n\n벤치마크 결과:\n- Bitcoin Core v30: 전체 메인넷 체인 재검증에 167분 소요 (스크립트 또는 서명 검증 없음)\n- Hornet UTXO(1): 15분에 완료 (32코어 컴퓨터, 128GB RAM, 1TB 스토리지)\n\n● **Bithoven: Bitcoin Script를 위한 공식 검증된 명령형 언어**: Hyunhum Cho가 Delving Bitcoin에 miniscript의 대안인 Bithoven에 대해 작성했습니다. miniscript의 서술어 언어와 달리 Bithoven은 if, else, verify, return을 기본 연산으로 사용하는 친숙한 C 계열 구문을 사용합니다.\n\n● **먼지 공격 완화 논의**: Bubb1es가 Delving Bitcoin에 온체인 지갑에서 먼지(dust) 공격을 처리하는 방법을 게시했습니다. 먼지 공격은 공격자가 익명 주소에 먼지 UTXO를 전송하여 일부가 관련 없는 UTXO와 함께 의도치 않게 소비되길 바라는 방식입니다.\n\nBubb1es는 OP_RETURN 출력으로 전액을 사용하는 트랜잭션을 생성하여 먼지 UTXO를 증명 가능하게 소비 불가능하게 만드는 방법을 제안합니다. Bitcoin Core v30.0의 낮은 최소 릴레이 수수료율(0.1 sat/vbyte)로 인해 이것이 가능합니다."
   }
 ]
