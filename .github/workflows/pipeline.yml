@@ -65,6 +65,11 @@ jobs:
           fi
 
       - name: Trigger Vercel deployment
-        if: ${{ secrets.VERCEL_DEPLOY_HOOK != '' }}
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
         run: |
-          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+          if [ -n "$VERCEL_DEPLOY_HOOK" ]; then
+            curl -X POST "$VERCEL_DEPLOY_HOOK"
+          else
+            echo "VERCEL_DEPLOY_HOOK not set, skipping explicit trigger."
+          fi
