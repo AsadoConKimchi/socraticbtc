@@ -13,5 +13,7 @@ env/
 !data/*.json
 !site/src/data/*.json
 !vercel.json
+!site/package.json
+!site/package-lock.json
 !data/.gitkeep
 .DS_Store

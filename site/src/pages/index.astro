@@ -15,16 +15,24 @@ const optechKo: any[] = optechKoRaw;
 const reviewsKoMap = Object.fromEntries(reviewsKo.map((r: any) => [r.url, r]));
 const optechKoMap = Object.fromEntries(optechKo.map((r: any) => [r.url, r]));
 
+// optech URL에서 날짜 추출: /newsletters/2026/03/06/ → 2026-03-06
+function extractOptechDate(url: string): string | null {
+  const m = url.match(/\/newsletters\/(\d{4})\/(\d{2})\/(\d{2})\//);
+  return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
+}
+
 // Merge: for each item, attach translation if available
 const reviewItems = reviews.map((item: any, i: number) => ({
   ...item,
   ko: reviewsKoMap[item.url] ?? null,
+  date: item.date ?? null,
   id: i,
 }));
 
 const optechItems = optech.map((item: any, i: number) => ({
   ...item,
   ko: optechKoMap[item.url] ?? null,
+  date: item.date ?? extractOptechDate(item.url),
   id: i,
 }));
 
@@ -89,6 +97,7 @@ const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
           title={item.title}
           translatedTitle={item.ko?.translated_title}
           url={item.url}
+          date={item.date}
           isTranslated={!!item.ko && !item.ko.translated_title?.startsWith('[STUB]')}
           href={`/reviews/${item.id}`}
         />
@@ -106,6 +115,7 @@ const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
           title={item.title}
           translatedTitle={item.ko?.translated_title}
           url={item.url}
+          date={item.date}
           isTranslated={!!item.ko && !item.ko.translated_title?.startsWith('[STUB]')}
           href={`/newsletter/${item.id}`}
         />

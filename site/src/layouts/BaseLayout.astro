@@ -1,8 +1,14 @@
 ---
 export interface Props {
   title?: string;
+  description?: string;
 }
-const { title = 'SocraticBTC' } = Astro.props;
+const {
+  title = 'SocraticBTC',
+  description = 'Bitcoin Core PR Reviews & Optech Newsletters — Korean translations powered by Claude AI',
+} = Astro.props;
+const siteUrl = 'https://site-rouge-theta-41.vercel.app';
+const ogTitle = title;
 ---
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,7 +16,17 @@ const { title = 'SocraticBTC' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content="Bitcoin Core PR Reviews & Optech Newsletters — Korean translations powered by Claude AI" />
+    <meta name="description" content={description} />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="SocraticBTC" />
+    <meta property="og:url" content={siteUrl} />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={description} />
   </head>
   <body class="bg-base text-gray-100 min-h-screen font-sans">
     <header class="border-b border-border sticky top-0 bg-base z-10">

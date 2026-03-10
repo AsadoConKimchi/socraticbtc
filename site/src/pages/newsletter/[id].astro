@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { marked } from 'marked';
 import optechRaw from '../../data/optech.json';
 import optechKoRaw from '../../data/optech_ko.json';
 
@@ -18,9 +19,26 @@ const koMap = Object.fromEntries(optechKo.map((r: any) => [r.url, r]));
 const ko = item ? koMap[item.url] : null;
 const isTranslated = ko && !ko.translated_title?.startsWith('[STUB]');
 const isStub = ko?.translated_title?.startsWith('[STUB]');
+
+// optech URL에서 날짜 추출: /newsletters/2026/03/06/ → 2026-03-06
+function extractDateFromUrl(url: string): string | null {
+  const m = url.match(/\/newsletters\/(\d{4})\/(\d{2})\/(\d{2})\//);
+  return m ? `${m[1]}-${m[2]}-${m[3]}` : (item?.date ?? null);
+}
+const date: string | null = item ? extractDateFromUrl(item.url) : null;
+
+const displayTitle = isTranslated ? ko.translated_title : item?.title ?? 'Newsletter';
+const pageDescription = isTranslated
+  ? `${ko.translated_title} — Optech Newsletter 한국어 번역`
+  : `${item?.title ?? ''} — Bitcoin Optech Newsletter`;
+
+// 콘텐츠를 Markdown으로 파싱
+marked.setOptions({ breaks: true });
+const rawContent = isTranslated ? (ko.translated_content || '') : (item?.content || '');
+const htmlContent = rawContent ? await marked.parse(rawContent) : '';
 ---
 
-<BaseLayout title={isTranslated ? ko.translated_title : item?.title ?? 'Newsletter'}>
+<BaseLayout title={displayTitle} description={pageDescription}>
   {!item ? (
     <p class="text-gray-400">항목을 찾을 수 없습니다.</p>
   ) : (
@@ -37,13 +55,14 @@ const isStub = ko?.translated_title?.startsWith('[STUB]');
         }`}>
           {isTranslated ? '🤖 LLM 번역' : isStub ? '⏳ Stub (API 키 필요)' : '원문 (영어)'}
         </span>
+        {date && <span class="text-xs text-gray-500">{date}</span>}
         <a href={item.url} target="_blank" rel="noopener" class="text-xs text-gray-500 hover:text-btc transition-colors">
           원문 링크 ↗
         </a>
       </div>
 
       <h1 class="text-xl font-bold text-gray-100 mt-3 mb-6 leading-snug">
-        {isTranslated ? ko.translated_title : item.title}
+        {displayTitle}
       </h1>
 
       {isTranslated && ko.translated_title !== item.title && (
@@ -51,19 +70,13 @@ const isStub = ko?.translated_title?.startsWith('[STUB]');
       )}
 
       <div class="border-t border-border pt-6">
-        {isTranslated ? (
-          <div class="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed whitespace-pre-wrap">
-            {ko.translated_content || '번역된 본문이 없습니다.'}
-          </div>
-        ) : isStub ? (
+        {isStub && !isTranslated ? (
           <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4 text-yellow-400 text-sm">
             <p class="font-medium mb-1">⏳ 번역 대기 중</p>
             <p class="text-yellow-500 text-xs">ANTHROPIC_API_KEY를 설정하고 번역을 다시 실행하면 한국어 번역이 표시됩니다.</p>
           </div>
         ) : (
-          <div class="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed whitespace-pre-wrap">
-            {item.content || '본문이 없습니다.'}
-          </div>
+          <div class="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed" set:html={htmlContent || '본문이 없습니다.'} />
         )}
       </div>
     </div>

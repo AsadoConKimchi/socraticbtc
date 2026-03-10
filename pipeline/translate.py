@@ -34,24 +34,40 @@ def translate_content(source: str, limit: int = 1) -> list[dict]:
         return []
 
     all_items = json.loads(input_path.read_text(encoding="utf-8"))
-    items = all_items[:limit]
+
+    # 기존 번역 로드 — 이미 번역된 항목은 skip (incremental)
+    out_path = DATA_DIR / f"{source}_ko.json"
+    existing: list[dict] = []
+    if out_path.exists():
+        existing = json.loads(out_path.read_text(encoding="utf-8"))
+    translated_urls = {
+        e["url"] for e in existing
+        if not e.get("translated_title", "").startswith("[STUB]")
+    }
+
+    pending = [i for i in all_items if i["url"] not in translated_urls]
+    items = pending[:limit]
+    console.print(f"  [dim]{len(translated_urls)} already translated, {len(pending)} pending, processing {len(items)}[/]")
+
     api_key = os.environ.get("ANTHROPIC_API_KEY")
 
     if not api_key:
         console.print("[yellow]ANTHROPIC_API_KEY not set. Saving stub translations.[/]")
-        results = []
+        results = list(existing)
         for item in items:
-            results.append({
-                "title": item["title"],
-                "url": item["url"],
-                "translated_title": f"[STUB] {item['title']}",
-                "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY.",
-            })
+            if item["url"] not in {e["url"] for e in results}:
+                results.append({
+                    "title": item["title"],
+                    "url": item["url"],
+                    "translated_title": f"[STUB] {item['title']}",
+                    "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY.",
+                })
         _save(source, results)
         return results
 
     client = anthropic.Anthropic(api_key=api_key)
-    results = []
+    # 기존 번역을 결과에 포함
+    results = list(existing)
 
     for item in items:
         console.print(f"  Translating: {item['title'][:60]}...")
