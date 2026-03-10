@@ -35,8 +35,6 @@ const optechItems = optech.map((item: any, i: number) => ({
   date: item.date ?? extractOptechDate(item.url),
   id: i,
 }));
-
-const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
 ---
 
 <BaseLayout title="SocraticBTC — Bitcoin 기술 콘텐츠 한국어 번역">
@@ -49,48 +47,31 @@ const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
 
   <!-- Tabs -->
   <div class="flex gap-1 mb-6 border-b border-border">
-    <a
-      href="/?tab=reviews"
-      class={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${
-        tab === 'reviews'
-          ? 'text-btc border-b-2 border-btc -mb-px'
-          : 'text-gray-400 hover:text-gray-200'
-      }`}
+    <button
+      id="tab-reviews"
+      onclick="switchTab('reviews')"
+      class="tab-btn px-4 py-2 text-sm font-medium rounded-t transition-colors text-btc border-b-2 border-btc -mb-px"
     >
       📝 PR Reviews
       <span class="ml-1 text-xs text-gray-500">({reviewItems.length})</span>
-    </a>
-    <a
-      href="/?tab=optech"
-      class={`px-4 py-2 text-sm font-medium rounded-t transition-colors ${
-        tab === 'optech'
-          ? 'text-btc border-b-2 border-btc -mb-px'
-          : 'text-gray-400 hover:text-gray-200'
-      }`}
+    </button>
+    <button
+      id="tab-optech"
+      onclick="switchTab('optech')"
+      class="tab-btn px-4 py-2 text-sm font-medium rounded-t transition-colors text-gray-400 hover:text-gray-200"
     >
       📰 Optech Newsletters
       <span class="ml-1 text-xs text-gray-500">({optechItems.length})</span>
-    </a>
+    </button>
   </div>
 
-  <!-- Stats bar -->
-  {tab === 'reviews' && (
+  <!-- Reviews panel -->
+  <div id="panel-reviews">
     <div class="flex gap-4 mb-5 text-xs text-gray-500">
       <span>총 {reviewItems.length}건</span>
       <span>번역 완료: {reviewItems.filter((r: any) => r.ko && !r.ko.translated_title?.startsWith('[STUB]')).length}건</span>
       <span>Stub: {reviewItems.filter((r: any) => r.ko?.translated_title?.startsWith('[STUB]')).length}건</span>
     </div>
-  )}
-  {tab === 'optech' && (
-    <div class="flex gap-4 mb-5 text-xs text-gray-500">
-      <span>총 {optechItems.length}건</span>
-      <span>번역 완료: {optechItems.filter((r: any) => r.ko && !r.ko.translated_title?.startsWith('[STUB]')).length}건</span>
-      <span>Stub: {optechItems.filter((r: any) => r.ko?.translated_title?.startsWith('[STUB]')).length}건</span>
-    </div>
-  )}
-
-  <!-- Card list -->
-  {tab === 'reviews' && (
     <div class="grid gap-3">
       {reviewItems.map((item: any) => (
         <ContentCard
@@ -106,9 +87,15 @@ const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
         <p class="text-gray-500 text-sm py-8 text-center">데이터 없음 — scrape 먼저 실행하세요</p>
       )}
     </div>
-  )}
+  </div>
 
-  {tab === 'optech' && (
+  <!-- Optech panel -->
+  <div id="panel-optech" style="display:none">
+    <div class="flex gap-4 mb-5 text-xs text-gray-500">
+      <span>총 {optechItems.length}건</span>
+      <span>번역 완료: {optechItems.filter((r: any) => r.ko && !r.ko.translated_title?.startsWith('[STUB]')).length}건</span>
+      <span>Stub: {optechItems.filter((r: any) => r.ko?.translated_title?.startsWith('[STUB]')).length}건</span>
+    </div>
     <div class="grid gap-3">
       {optechItems.map((item: any) => (
         <ContentCard
@@ -124,5 +111,41 @@ const tab = Astro.url.searchParams.get('tab') ?? 'reviews';
         <p class="text-gray-500 text-sm py-8 text-center">데이터 없음 — scrape 먼저 실행하세요</p>
       )}
     </div>
-  )}
+  </div>
 </BaseLayout>
+
+<script>
+  function switchTab(tab: string) {
+    const panels = ['reviews', 'optech'];
+    panels.forEach((p) => {
+      const panel = document.getElementById(`panel-${p}`);
+      const btn = document.getElementById(`tab-${p}`);
+      if (!panel || !btn) return;
+
+      if (p === tab) {
+        panel.style.display = '';
+        btn.classList.add('text-btc', 'border-b-2', 'border-btc', '-mb-px');
+        btn.classList.remove('text-gray-400', 'hover:text-gray-200');
+      } else {
+        panel.style.display = 'none';
+        btn.classList.remove('text-btc', 'border-b-2', 'border-btc', '-mb-px');
+        btn.classList.add('text-gray-400', 'hover:text-gray-200');
+      }
+    });
+
+    // URL 업데이트 (새로고침 없이)
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', tab);
+    history.replaceState(null, '', url.toString());
+  }
+
+  // 페이지 로드 시 URL 파라미터 확인
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get('tab');
+  if (initialTab === 'optech') {
+    switchTab('optech');
+  }
+
+  // 전역 함수로 노출
+  (window as any).switchTab = switchTab;
+</script>

@@ -30,7 +30,7 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install -e .
+        run: pip install httpx>=0.27 beautifulsoup4>=4.12 anthropic>=0.25 rich>=13.0 click>=8.1
 
       - name: Scrape Bitcoin Core PR Reviews
         run: |
@@ -52,11 +52,19 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python cli.py translate --source optech --limit 999
 
+      - name: Sync data files to site
+        run: |
+          cp data/reviews.json site/src/data/reviews.json
+          cp data/reviews_ko.json site/src/data/reviews_ko.json
+          cp data/optech.json site/src/data/optech.json
+          cp data/optech_ko.json site/src/data/optech_ko.json
+          echo "Data files synced to site/src/data/"
+
       - name: Commit updated data files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ site/src/data/
           if git diff --staged --quiet; then
             echo "No new content to commit."
           else
