@@ -1,5 +1,7 @@
 # SocraticBTC
 
+**Live site:** https://site-rouge-theta-41.vercel.app
+
 A Python-based scraper and Korean translation pipeline for Bitcoin technical content.
 
 ## What It Does
