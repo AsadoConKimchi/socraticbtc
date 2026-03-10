@@ -2,7 +2,25 @@
   {
     "title": "#33300 Compact block harness",
     "url": "https://bitcoincore.reviews/33300",
-    "translated_title": "[STUB] #33300 Compact block harness",
-    "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY."
+    "translated_title": "#33300 컴팩트 블록 퍼즈 테스트 하네스",
+    "translated_content": "컴팩트 블록 하네스 (테스트)\n2025년 10월 8일\nhttps://github.com/bitcoin/bitcoin/pull/33300\n진행자: marcofleon — PR 작성자: Crypt-iQ\n\n**노트**\n이 PR은 컴팩트 블록 릴레이 테스트를 위한 퍼즈 하네스(fuzz harness)를 추가하고, 속도와 안정성 향상을 위한 테스트 인프라 변경사항도 포함합니다. 퍼징 관련 이전 리뷰 클럽으로는 #17860, #18521, #21142, #30605가 있습니다.\n\n하네스는 세 개의 피어가 테스트 노드에 다양한 메시지(CMPCTBLOCK, BLOCKTXN, HEADERS, SENDCMPCT, TX)를 전송하는 방식으로 P2P 네트워크 동작을 시뮬레이션하며, 노드의 컴팩트 블록 로직을 실행시킵니다. 목표는 버그를 찾고 단언(assertion)이 유지되는지 확인하는 것입니다. 이 퍼즈 테스트로 발견된 버그 예시는 #33296을 참고하세요.\n\n**컴팩트 블록 프로토콜 개요**\nBIP 152는 컴팩트 블록 릴레이 프로토콜을 도입했습니다. 대부분의 트랜잭션이 피어의 mempool에 이미 있다는 가정 하에 블록의 인코딩된 버전을 전송함으로써 블록 전파 시 대역폭과 지연 시간을 줄입니다.\n\n컴팩트 블록의 구성:\n- 헤더\n- 짧은 트랜잭션 식별자 (32바이트 대신 6바이트)\n- 미리 채워진 트랜잭션(prefilled transactions)\n\n수신 노드는 mempool의 트랜잭션을 사용해 블록을 재구성하며, 누락된 트랜잭션이 있을 경우 GETBLOCKTXN 메시지로 요청합니다.\n\n두 가지 모드:\n- 저대역폭(low-bandwidth): 피어가 INV/GETDATA로 요청한 후에만 블록 전송\n- 고대역폭(high-bandwidth): 전체 검증 전에도 수신 즉시 피어에게 블록 전송\n\n**퍼즈 테스팅**\n퍼징은 코드에 의사 난수 입력을 제공하여 버그와 예상치 못한 동작을 발견하는 테스트 기법입니다. 퍼저는 코드 커버리지와 같은 피드백을 입력 변이의 가이드로 사용하여 대상 코드 내 더 깊은 경로를 탐색할 수 있습니다."
+  },
+  {
+    "title": "#32489 wallet: Add exportwatchonlywallet RPC",
+    "url": "https://bitcoincore.reviews/32489",
+    "translated_title": "#32489 wallet: exportwatchonlywallet RPC 추가",
+    "translated_content": "wallet: exportwatchonlywallet RPC 추가 (wallet, rpc)\n2025년 8월 6일\nhttps://github.com/bitcoin/bitcoin/pull/32489\n진행자: ryanofsky — PR 작성자: achow101\n\n**노트**\n\n**동기 및 사용 사례**\n에어갭(\"서명\") 머신은 개인 키를 보유하고, 온라인(\"워치온리\") 노드는 잔액을 추적하고, 수신 주소를 생성하고, PSBT를 준비합니다. 기존에는 사용자가 importdescriptors를 타이핑하거나 스크립팅하고, 주소 레이블을 복사하는 등의 방식으로 워치온리 지갑을 수동으로 다시 생성해야 했습니다.\n\nexportwatchonlywallet은 다음을 포함한 지갑 파일을 생성하는 단일 단계 RPC를 제공합니다:\n- 모든 공개 디스크립터(필요 시 캐시 포함)\n- 주소록 항목, 수신 요청 메타데이터, \"재사용 방지\" 마커\n- 모든 지갑 TX (재스캔 불필요)\n- 지속적인 잠긴 코인 상태 및 지갑 플래그\n- 개인 키 없음 (WALLET_FLAG_DISABLE_PRIVATE_KEYS로 지갑 생성)\n\n결과물은 어떤 노드로든 이동하여 기존 restorewallet RPC로 로드할 수 있습니다.\n\n**이 PR에서 도입된 새로운 구성 요소**\n- Descriptor::CanSelfExpand(): 디스크립터가 캐시와 개인 키 없이 새 scriptPubKey를 생성할 수 있는지 확인\n- CWallet::ExportDescriptors(bool export_private): listdescriptors RPC에서 디스크립터 열거 로직 분리\n- CWallet::ExportWatchOnlyWallet(): 임시 워치온리 지갑 DB 생성, 채우기, dst에 백업 후 임시 디렉토리 삭제\n- exportwatchonlywallet <destination> RPC\n- wallet_exported_watchonly.py 기능 테스트\n\n**내보내기 알고리즘 고수준 개요**\n1. 사전 검사: 목적지 경로 미존재 확인; 표준 경로 확보; cs_wallet 잠금\n2. ExportDescriptors(false)로 디스크립터 데이터 수집\n3. WALLET_FLAG_DISABLE_PRIVATE_KEYS를 포함한 동일 플래그로 새 지갑 DB 인스턴스화\n4. 단일 배치 TX 내에서 새 지갑 채우기\n5. 요청한 목적지에 새 지갑 백업 후 임시 디렉토리 삭제"
+  },
+  {
+    "title": "#31829 Improve TxOrphanage denial of service bounds",
+    "url": "https://bitcoincore.reviews/31829",
+    "translated_title": "#31829 TxOrphanage 서비스 거부 공격 방어 한계 개선",
+    "translated_content": "TxOrphanage 서비스 거부 공격 방어 한계 개선 (p2p)\n2025년 6월 18일\nhttps://github.com/bitcoin/bitcoin/pull/31829\n진행자: glozow — PR 작성자: glozow\n\n**노트**\nPR 설명은 이 변경의 동기와 새로운 퇴출 전략을 요약합니다. 고아 저장소(orphanage)는 DoS 공격에 저항해야 하며, 동시에 어떤 피어도 다른 피어의 고아 저장소 공간 사용에 영향을 주지 않도록 해야 합니다.\n\n이 PR은 다음을 수행합니다:\n- TxOrphanageImpl에 상속된 TxOrphanage 클래스를 가상화\n- 새로운 퇴출 전략 구현\n- 다양한 TxOrphanage 데이터 구조를 단일 boost::multi_index_container로 교체\n\n이러한 변경으로 이제 피어당 최소 1개의 최대 크기 패키지에 해당하는 고아 해석을 보장할 수 있습니다. 대부분의 피어가 고아 트랜잭션을 제공하지 않는 경우, 그들에게 할당된 미사용 공간은 이를 필요로 하는 피어들이 사용할 수 있습니다.\n\n**새로운 퇴출 알고리즘 요약**\n- 트랜잭션 대신 공고(announcement) 단위로 퇴출\n- 피어당 메모리 \"예약(reservation)\" 방식 도입\n- 전역 메모리 한계는 피어 수에 따라 확장\n- 기본 공고 한계가 100에서 3000으로 증가\n- 고아 만료(orphan expiration) 제거\n\n이 변경은 적대적인 환경에서 1p1c(1-부모-1-자식) 릴레이의 안정성을 크게 향상시킵니다."
+  },
+  {
+    "title": "#30605 Cluster linearization: separate tests from tests-of-tests",
+    "url": "https://bitcoincore.reviews/30605",
+    "translated_title": "#30605 클러스터 선형화: 테스트와 테스트의 테스트 분리",
+    "translated_content": "클러스터 선형화: 테스트와 테스트의 테스트 분리 (테스트)\n2025년 6월 11일\nhttps://github.com/bitcoin/bitcoin/pull/30605\n진행자: marcofleon — PR 작성자: sipa\n\n**노트**\n클러스터(cluster)는 일부 트랜잭션이 다른 트랜잭션에 의존하는 방식으로 부모-자식 관계를 형성하는 트랜잭션 그룹입니다. 가장 단순한 클러스터는 단일 트랜잭션이며, 대부분의 클러스터는 몇 개의 트랜잭션으로 구성됩니다. 현재 클러스터 크기 제한은 64개 트랜잭션입니다.\n\n높은 수준에서 클러스터 선형화는 의존성을 존중하면서(부모를 자식보다 먼저) \"청크(chunk)\"의 순서 목록을 고려할 때 유효 수수료율을 최대화하는 방식으로 주어진 클러스터 내의 트랜잭션을 정렬하는 과정입니다. 이 선형화를 통해 채굴자들은 가장 수익성 높은 트랜잭션을 먼저 포함시킬 수 있습니다.\n\n클러스터 선형화를 위한 데이터 구조와 알고리즘은 cluster_linearize.h에서 찾을 수 있습니다.\n\n선형화 코드는 복잡하므로 올바름을 보장하기 위해 퍼즈 테스팅에 의존합니다. 이 PR의 동기는 이러한 헬퍼들이 제대로 작동하는지 확인하는 데 사용되는 새로운 퍼즈 타겟을 구성하는 것입니다. 테스트 자체를 테스트하는 전용 타겟을 갖춤으로써 클러스터 선형화 코드에 버그가 없다는 더 강한 확신을 가질 수 있습니다.\n\n**연습**\nclusterlin_linearize 타겟을 퍼징해보세요. chunking을 simple_chunking으로 변경하고 타겟을 다시 실행하면 몇 분 후에 크래시가 발생합니다. 이는 퍼즈 테스팅이 테스트 자체의 작은 버그를 빠르게 잡아내는 간단한 예시입니다."
   }
 ]
