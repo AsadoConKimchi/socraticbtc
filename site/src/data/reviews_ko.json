@@ -22,5 +22,1499 @@
     "url": "https://bitcoincore.reviews/30605",
     "translated_title": "#30605 클러스터 선형화: 테스트와 테스트의 테스트 분리",
     "translated_content": "클러스터 선형화: 테스트와 테스트의 테스트 분리 (테스트)\n2025년 6월 11일\nhttps://github.com/bitcoin/bitcoin/pull/30605\n진행자: marcofleon — PR 작성자: sipa\n\n**노트**\n클러스터(cluster)는 일부 트랜잭션이 다른 트랜잭션에 의존하는 방식으로 부모-자식 관계를 형성하는 트랜잭션 그룹입니다. 가장 단순한 클러스터는 단일 트랜잭션이며, 대부분의 클러스터는 몇 개의 트랜잭션으로 구성됩니다. 현재 클러스터 크기 제한은 64개 트랜잭션입니다.\n\n높은 수준에서 클러스터 선형화는 의존성을 존중하면서(부모를 자식보다 먼저) \"청크(chunk)\"의 순서 목록을 고려할 때 유효 수수료율을 최대화하는 방식으로 주어진 클러스터 내의 트랜잭션을 정렬하는 과정입니다. 이 선형화를 통해 채굴자들은 가장 수익성 높은 트랜잭션을 먼저 포함시킬 수 있습니다.\n\n클러스터 선형화를 위한 데이터 구조와 알고리즘은 cluster_linearize.h에서 찾을 수 있습니다.\n\n선형화 코드는 복잡하므로 올바름을 보장하기 위해 퍼즈 테스팅에 의존합니다. 이 PR의 동기는 이러한 헬퍼들이 제대로 작동하는지 확인하는 데 사용되는 새로운 퍼즈 타겟을 구성하는 것입니다. 테스트 자체를 테스트하는 전용 타겟을 갖춤으로써 클러스터 선형화 코드에 버그가 없다는 더 강한 확신을 가질 수 있습니다.\n\n**연습**\nclusterlin_linearize 타겟을 퍼징해보세요. chunking을 simple_chunking으로 변경하고 타겟을 다시 실행하면 몇 분 후에 크래시가 발생합니다. 이는 퍼즈 테스팅이 테스트 자체의 작은 버그를 빠르게 잡아내는 간단한 예시입니다."
+  },
+  {
+    "title": "Protect addnode peers during IBD",
+    "url": "https://bitcoincore.reviews/32051",
+    "translated_title": "Protect addnode peers during IBD",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6oq2xEEdrse5UvuG5'}"
+  },
+  {
+    "title": "Separate UTXO set access from validation functions",
+    "url": "https://bitcoincore.reviews/32317",
+    "translated_title": "Separate UTXO set access from validation functions",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6pBcsAeeMeVBQnYRe'}"
+  },
+  {
+    "title": "Add bitcoin wrapper executable",
+    "url": "https://bitcoincore.reviews/31375",
+    "translated_title": "Add bitcoin wrapper executable",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6poKrVTSaig1sD7SE'}"
+  },
+  {
+    "title": "Add checkBlock() to Mining interface",
+    "url": "https://bitcoincore.reviews/31981",
+    "translated_title": "Add checkBlock() to Mining interface",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6qBQCXPFETgzXdDdq'}"
+  },
+  {
+    "title": "Cluster mempool: add txgraph diagrams/mining/eviction",
+    "url": "https://bitcoincore.reviews/31444",
+    "translated_title": "Cluster mempool: add txgraph diagrams/mining/eviction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6qYUbUxW3aboKQjrE'}"
+  },
+  {
+    "title": "Refactor BnB tests",
+    "url": "https://bitcoincore.reviews/29532",
+    "translated_title": "Refactor BnB tests",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6qvnpXhosJjgk1oRW'}"
+  },
+  {
+    "title": "Add Fee rate Forecaster Manager",
+    "url": "https://bitcoincore.reviews/31664",
+    "translated_title": "Add Fee rate Forecaster Manager",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6rP5j2HYsZjTzrhJw'}"
+  },
+  {
+    "title": "Benchmark Chainstate::ConnectBlock duration",
+    "url": "https://bitcoincore.reviews/31689",
+    "translated_title": "Benchmark Chainstate::ConnectBlock duration",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6rmPvEnBRdFkSxMiy'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 29.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 29.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6s9TrhMwpVTspWQLn'}"
+  },
+  {
+    "title": "Stricter internal handling of invalid blocks",
+    "url": "https://bitcoincore.reviews/31405",
+    "translated_title": "Stricter internal handling of invalid blocks",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6sW3Y7jQCesxNYoVC'}"
+  },
+  {
+    "title": "Cluster mempool: introduce TxGraph",
+    "url": "https://bitcoincore.reviews/31363",
+    "translated_title": "Cluster mempool: introduce TxGraph",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6tDD4mrVAiEcugckQ'}"
+  },
+  {
+    "title": "Track and use all potential peers for orphan resolution",
+    "url": "https://bitcoincore.reviews/31397",
+    "translated_title": "Track and use all potential peers for orphan resolution",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6teFnZKErWyjjMPj9'}"
+  },
+  {
+    "title": "Ephemeral Dust",
+    "url": "https://bitcoincore.reviews/30239",
+    "translated_title": "Ephemeral Dust",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6u9mVM64qtZFyiaZT'}"
+  },
+  {
+    "title": "add getorphantxs",
+    "url": "https://bitcoincore.reviews/30793",
+    "translated_title": "add getorphantxs",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6uapCrFu4Qk1EubU9'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 28.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 28.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6vBHKQKRV49xabWcG'}"
+  },
+  {
+    "title": "Add PayToAnchor(P2A), OP\\_1 <0x4e73> as standard output script for spending",
+    "url": "https://bitcoincore.reviews/30352",
+    "translated_title": "Add PayToAnchor(P2A), OP\\_1 <0x4e73> as standard output script for spending",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6va6YczEEWS31xR6k'}"
+  },
+  {
+    "title": "Testnet4 including PoW difficulty adjustment fix",
+    "url": "https://bitcoincore.reviews/29775",
+    "translated_title": "Testnet4 including PoW difficulty adjustment fix",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6vzeHSe4MvUvy9Myh'}"
+  },
+  {
+    "title": "Don't wipe indexes again when continuing a prior reindex",
+    "url": "https://bitcoincore.reviews/30132",
+    "translated_title": "Don't wipe indexes again when continuing a prior reindex",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6wdqoVqakajy2Di8j'}"
+  },
+  {
+    "title": "index TxOrphanage by wtxid, allow entries with same txid",
+    "url": "https://bitcoincore.reviews/30000",
+    "translated_title": "index TxOrphanage by wtxid, allow entries with same txid",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6wzfpM6mpjA5H3LDf'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 27.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 27.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6xRiMeBm7j2Fn7eSp'}"
+  },
+  {
+    "title": "Implement 64 bit arithmetic op codes in the Script interpreter",
+    "url": "https://bitcoincore.reviews/29221",
+    "translated_title": "Implement 64 bit arithmetic op codes in the Script interpreter",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6y5ABAZmC7yWr5Vhj'}"
+  },
+  {
+    "title": "bitcoin-inquisition #45: LNHANCE inquisition (CSFS, INTERNALKEY)",
+    "url": "https://bitcoincore.reviews/45",
+    "translated_title": "bitcoin-inquisition #45: LNHANCE inquisition (CSFS, INTERNALKEY)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6z9eczuk2upAGzg1P'}"
+  },
+  {
+    "title": "bitcoin-inquisition #39: Re enable OP_CAT",
+    "url": "https://bitcoincore.reviews/39",
+    "translated_title": "bitcoin-inquisition #39: Re enable OP_CAT",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu6zZCwSuzU7m6psEt9'}"
+  },
+  {
+    "title": "Add `maxfeerate` and `maxburnamount` args to submitpackage",
+    "url": "https://bitcoincore.reviews/28950",
+    "translated_title": "Add `maxfeerate` and `maxburnamount` args to submitpackage",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu712UwmWRuLat5Aui7'}"
+  },
+  {
+    "title": "Nuke adjusted time (attempt 2)",
+    "url": "https://bitcoincore.reviews/28956",
+    "translated_title": "Nuke adjusted time (attempt 2)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu71s66ZCHYFDhgn5Wa'}"
+  },
+  {
+    "title": "Introduce internal kernel library",
+    "url": "https://bitcoincore.reviews/28690",
+    "translated_title": "Introduce internal kernel library",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu72EfWjw3LNSazbwaX'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 26.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 26.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu72cUrA4UABRGc6EMs'}"
+  },
+  {
+    "title": "Fee Estimator updates from Validation Interface/CScheduler thread",
+    "url": "https://bitcoincore.reviews/28368",
+    "translated_title": "Fee Estimator updates from Validation Interface/CScheduler thread",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu72yK1nfWhVNWvE4WR'}"
+  },
+  {
+    "title": "Type-safe transaction identifiers",
+    "url": "https://bitcoincore.reviews/28107",
+    "translated_title": "Type-safe transaction identifiers",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu73MstAnF6vMZ9Xsr9'}"
+  },
+  {
+    "title": "transport abstraction",
+    "url": "https://bitcoincore.reviews/28165",
+    "translated_title": "transport abstraction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu73nfxTxu9Kgf1bawe'}"
+  },
+  {
+    "title": "Silent Payments: Implement BIP352",
+    "url": "https://bitcoincore.reviews/28122",
+    "translated_title": "Silent Payments: Implement BIP352",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu74JS9t1nYunJ7kPmS'}"
+  },
+  {
+    "title": "Track mempool conflicts with wallet transactions",
+    "url": "https://bitcoincore.reviews/27307",
+    "translated_title": "Track mempool conflicts with wallet transactions",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu74f1umig1fd4xfxXM'}"
+  },
+  {
+    "title": "util: generalize accounting of system-allocated memory in pool resource",
+    "url": "https://bitcoincore.reviews/27748",
+    "translated_title": "util: generalize accounting of system-allocated memory in pool resource",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu755p1pnG74fTNobqa'}"
+  },
+  {
+    "title": "Stop relaying non-mempool txs",
+    "url": "https://bitcoincore.reviews/27625",
+    "translated_title": "Stop relaying non-mempool txs",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu75cK5AbTj1UwydSns'}"
+  },
+  {
+    "title": "Remove shutdown from kernel library",
+    "url": "https://bitcoincore.reviews/27711",
+    "translated_title": "Remove shutdown from kernel library",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu769K6E1o1KE2rhRMB'}"
+  },
+  {
+    "title": "When a block is disconnected, update transactions that are no longer conflicted",
+    "url": "https://bitcoincore.reviews/27145",
+    "translated_title": "When a block is disconnected, update transactions that are no longer conflicted",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu76ea4tknEdWWZZCP2'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 25.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 25.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu77F3So46tP94FekyH'}"
+  },
+  {
+    "title": "Allow inbound whitebind connections to more aggressively evict peers when slots are full",
+    "url": "https://bitcoincore.reviews/27600",
+    "translated_title": "Allow inbound whitebind connections to more aggressively evict peers when slots are full",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu77i4jxnftoqYbPTTq'}"
+  },
+  {
+    "title": "Accept options as named-only parameters",
+    "url": "https://bitcoincore.reviews/26485",
+    "translated_title": "Accept options as named-only parameters",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu78hMGentDw1ZhjwYv'}"
+  },
+  {
+    "title": "Add getprioritisationmap, delete a mapDeltas entry when delta==0",
+    "url": "https://bitcoincore.reviews/27501",
+    "translated_title": "Add getprioritisationmap, delete a mapDeltas entry when delta==0",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu793w7x8LuLA1dUnzc'}"
+  },
+  {
+    "title": "Add importmempool RPC",
+    "url": "https://bitcoincore.reviews/27460",
+    "translated_title": "Add importmempool RPC",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu79SzRnGCnYNXWUjRj'}"
+  },
+  {
+    "title": "Do not flush block to disk if it is already there",
+    "url": "https://bitcoincore.reviews/27039",
+    "translated_title": "Do not flush block to disk if it is already there",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu79zVCchwoSsGwJmSj'}"
+  },
+  {
+    "title": "MiniTapscript: port Miniscript to Tapscript (Part 2)",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "MiniTapscript: port Miniscript to Tapscript (Part 2)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7AMpCeB1Zw3psnkv8'}"
+  },
+  {
+    "title": "MiniTapscript: port Miniscript to Tapscript",
+    "url": "https://bitcoincore.reviews/27255",
+    "translated_title": "MiniTapscript: port Miniscript to Tapscript",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7AyXA6cTXLCJNjXF2'}"
+  },
+  {
+    "title": "Ephemeral Anchors",
+    "url": "https://bitcoincore.reviews/26403",
+    "translated_title": "Ephemeral Anchors",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7BTYSDu1e8WzXcZRX'}"
+  },
+  {
+    "title": "Don't download witnesses for assumed-valid blocks when running in prune mode",
+    "url": "https://bitcoincore.reviews/27050",
+    "translated_title": "Don't download witnesses for assumed-valid blocks when running in prune mode",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7BxoiRwrYfN6pkYhs'}"
+  },
+  {
+    "title": "Reduce cs_main scope, guard block index 'nFile' under a local mutex",
+    "url": "https://bitcoincore.reviews/27006",
+    "translated_title": "Reduce cs_main scope, guard block index 'nFile' under a local mutex",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7CJPqvs9pn9ty5GQj'}"
+  },
+  {
+    "title": "Add pool based memory resource",
+    "url": "https://bitcoincore.reviews/25325",
+    "translated_title": "Add pool based memory resource",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7CihUguLvaexcQGdy'}"
+  },
+  {
+    "title": "nVersion=3 and Package RBF",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "nVersion=3 and Package RBF",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7D4nGUtTLXR7Emj2H'}"
+  },
+  {
+    "title": "nVersion=3 and Package RBF",
+    "url": "https://bitcoincore.reviews/25038",
+    "translated_title": "nVersion=3 and Package RBF",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7DRMp5ux7oUWYFi8k'}"
+  },
+  {
+    "title": "add `addpermissionflags` RPC",
+    "url": "https://bitcoincore.reviews/26441",
+    "translated_title": "add `addpermissionflags` RPC",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Dte8Yik3xKNWJcUi'}"
+  },
+  {
+    "title": "bitcoin-inquisition #16: Activation logic for testing consensus changes",
+    "url": "https://bitcoincore.reviews/16",
+    "translated_title": "bitcoin-inquisition #16: Activation logic for testing consensus changes",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7EPQGRJ78dtqYwr8w'}"
+  },
+  {
+    "title": "Track AddrMan totals by network and table, improve precision of adding fixed seeds",
+    "url": "https://bitcoincore.reviews/26847",
+    "translated_title": "Track AddrMan totals by network and table, improve precision of adding fixed seeds",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7EmUgkj4WyhDYfdK7'}"
+  },
+  {
+    "title": "wallet: ensure the wallet is unlocked when needed for rescanning",
+    "url": "https://bitcoincore.reviews/26347",
+    "translated_title": "wallet: ensure the wallet is unlocked when needed for rescanning",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7FGVHDpDxRhHyABdM'}"
+  },
+  {
+    "title": "logging: use std::bitset for categories",
+    "url": "https://bitcoincore.reviews/26697",
+    "translated_title": "logging: use std::bitset for categories",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7FeZFmayTtepXFpGj'}"
+  },
+  {
+    "title": "Track active requests and wait for last to finish",
+    "url": "https://bitcoincore.reviews/26742",
+    "translated_title": "Track active requests and wait for last to finish",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7GQTEscvkAp1iPUDR'}"
+  },
+  {
+    "title": "bench BlockAssembler on a mempool with packages",
+    "url": "https://bitcoincore.reviews/26695",
+    "translated_title": "bench BlockAssembler on a mempool with packages",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7HFoJzoNZURdpjs1M'}"
+  },
+  {
+    "title": "add coverage for dust mempool policy (-dustrelayfee setting)",
+    "url": "https://bitcoincore.reviews/26631",
+    "translated_title": "add coverage for dust mempool policy (-dustrelayfee setting)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7HcsVHvMPAXfyt9pt'}"
+  },
+  {
+    "title": "Improve error handling when VerifyDB fails due to insufficient dbcache",
+    "url": "https://bitcoincore.reviews/25574",
+    "translated_title": "Improve error handling when VerifyDB fails due to insufficient dbcache",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7J1SLnFyA7QkD7MDv'}"
+  },
+  {
+    "title": "Bump unconfirmed ancestor transactions to target feerate",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "Bump unconfirmed ancestor transactions to target feerate",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7JQFic5s4uTE83nry'}"
+  },
+  {
+    "title": "Bump unconfirmed ancestor transactions to target feerate",
+    "url": "https://bitcoincore.reviews/26152",
+    "translated_title": "Bump unconfirmed ancestor transactions to target feerate",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Jt2RHAhLF5ofJ3cm'}"
+  },
+  {
+    "title": "fetch multiple headers in getblockheader()",
+    "url": "https://bitcoincore.reviews/25261",
+    "translated_title": "fetch multiple headers in getblockheader()",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7KE7hGGTfuKeqCz55'}"
+  },
+  {
+    "title": "Move calculation logic out from `CheckSequenceLocksAtTip()`",
+    "url": "https://bitcoincore.reviews/23897",
+    "translated_title": "Move calculation logic out from `CheckSequenceLocksAtTip()`",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7KbSM41FjznARfyaC'}"
+  },
+  {
+    "title": "Move CNodeState members guarded by g_msgproc_mutex to Peer",
+    "url": "https://bitcoincore.reviews/26140",
+    "translated_title": "Move CNodeState members guarded by g_msgproc_mutex to Peer",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7KwXaRrnqmgdi3Va6'}"
+  },
+  {
+    "title": "Relax MIN_STANDARD_TX_NONWITNESS_SIZE to 65 non-witness bytes",
+    "url": "https://bitcoincore.reviews/26265",
+    "translated_title": "Relax MIN_STANDARD_TX_NONWITNESS_SIZE to 65 non-witness bytes",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7LLLSWCMZLRshARnd'}"
+  },
+  {
+    "title": "Virtualise CConnman and add initial PeerManager unit tests",
+    "url": "https://bitcoincore.reviews/25515",
+    "translated_title": "Virtualise CConnman and add initial PeerManager unit tests",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Lgg8gqraD8XJMSnd'}"
+  },
+  {
+    "title": "Bench: add priority level to the benchmark framework",
+    "url": "https://bitcoincore.reviews/26158",
+    "translated_title": "Bench: add priority level to the benchmark framework",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7MJ8hpxw6MWgRVx8R'}"
+  },
+  {
+    "title": "Make AddrFetch connections to fixed seeds",
+    "url": "https://bitcoincore.reviews/26114",
+    "translated_title": "Make AddrFetch connections to fixed seeds",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7MdyQeivSAeUbs3ti'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 24.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 24.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7N8VV1gX7mgsXE46u'}"
+  },
+  {
+    "title": "Make stalling timeout adaptive during IBD",
+    "url": "https://bitcoincore.reviews/25880",
+    "translated_title": "Make stalling timeout adaptive during IBD",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7NVZd3JsiRQyYgTke'}"
+  },
+  {
+    "title": "Add foreign_outputs metadata to support CoinJoin transactions",
+    "url": "https://bitcoincore.reviews/25991",
+    "translated_title": "Add foreign_outputs metadata to support CoinJoin transactions",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7NquGfYoaV6ccHQMK'}"
+  },
+  {
+    "title": "wallet: fast rescan with BIP157 block filters for descriptor wallets",
+    "url": "https://bitcoincore.reviews/25957",
+    "translated_title": "wallet: fast rescan with BIP157 block filters for descriptor wallets",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7PKvC9RMBuCa1PBHQ'}"
+  },
+  {
+    "title": "Advertise `NODE_REPLACE_BY_FEE` and connect to 1 outbound full-rbf peer if `mempoolfullrbf` sets",
+    "url": "https://bitcoincore.reviews/25600",
+    "translated_title": "Advertise `NODE_REPLACE_BY_FEE` and connect to 1 outbound full-rbf peer if `mempoolfullrbf` sets",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Pg1ZtBEfQWbMHyFV'}"
+  },
+  {
+    "title": "Properly rebroadcast unconfirmed transaction chains",
+    "url": "https://bitcoincore.reviews/25768",
+    "translated_title": "Properly rebroadcast unconfirmed transaction chains",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7QEFCnXdwPQQrdFVG'}"
+  },
+  {
+    "title": "Add util::Result failure values, multiple error and warning messages",
+    "url": "https://bitcoincore.reviews/25665",
+    "translated_title": "Add util::Result failure values, multiple error and warning messages",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7QaL2qpqW9F84XupV'}"
+  },
+  {
+    "title": "Reduce bandwidth during initial headers sync when a block is found",
+    "url": "https://bitcoincore.reviews/25720",
+    "translated_title": "Reduce bandwidth during initial headers sync when a block is found",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Qvv2abU1xu9PBk8z'}"
+  },
+  {
+    "title": "Decouple validation cache initialization from `ArgsManager`",
+    "url": "https://bitcoincore.reviews/25527",
+    "translated_title": "Decouple validation cache initialization from `ArgsManager`",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7RKEQFqbhhTBvnz94'}"
+  },
+  {
+    "title": "incorrect blk file size calculation during reindex results in recoverable blk file corruption",
+    "url": "https://bitcoincore.reviews/24858",
+    "translated_title": "incorrect blk file size calculation during reindex results in recoverable blk file corruption",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Rg4Ld7E5mAwXHzBZ'}"
+  },
+  {
+    "title": "Introduce generic 'Result' class and connect it to CreateTransaction and GetNewDestination",
+    "url": "https://bitcoincore.reviews/25218",
+    "translated_title": "Introduce generic 'Result' class and connect it to CreateTransaction and GetNewDestination",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7S6N38yPGC9VYhhRL'}"
+  },
+  {
+    "title": "Detect and ignore transactions that were CPFP'd in the fee estimator",
+    "url": "https://bitcoincore.reviews/25380",
+    "translated_title": "Detect and ignore transactions that were CPFP'd in the fee estimator",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7SWuiMbUt8q1KoDFX'}"
+  },
+  {
+    "title": "Fix chain tip data race and corrupt rest response",
+    "url": "https://bitcoincore.reviews/25077",
+    "translated_title": "Fix chain tip data race and corrupt rest response",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7T2fiLog11zKYkPw9'}"
+  },
+  {
+    "title": "Verify the block filter hash when reading the filter from disk.",
+    "url": "https://bitcoincore.reviews/24832",
+    "translated_title": "Verify the block filter hash when reading the filter from disk.",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7TRETeRFiHDYqKJBe'}"
+  },
+  {
+    "title": "Fix signed integer overflow in prioritisetransaction RPC",
+    "url": "https://bitcoincore.reviews/23418",
+    "translated_title": "Fix signed integer overflow in prioritisetransaction RPC",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7U79y8QZaKtJ6fabZ'}"
+  },
+  {
+    "title": "Manual block-relay-only connections with addnode",
+    "url": "https://bitcoincore.reviews/24170",
+    "translated_title": "Manual block-relay-only connections with addnode",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7UcB1xN6Cmj6rRP41'}"
+  },
+  {
+    "title": "net processing: Reduce resource usage for inbound block-relay-only connections",
+    "url": "https://bitcoincore.reviews/22778",
+    "translated_title": "net processing: Reduce resource usage for inbound block-relay-only connections",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7V7RxF2tmBDFECERq'}"
+  },
+  {
+    "title": "Add BIP-125 rule 5 testcase with default mempool",
+    "url": "https://bitcoincore.reviews/25228",
+    "translated_title": "Add BIP-125 rule 5 testcase with default mempool",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7VUFwnk3comCiLE2A'}"
+  },
+  {
+    "title": "Miniscript support in Output Descriptors (part 2)",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "Miniscript support in Output Descriptors (part 2)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7VqLZ51LoavzUtiuA'}"
+  },
+  {
+    "title": "Miniscript support in Output Descriptors (part 1)",
+    "url": "https://bitcoincore.reviews/24148",
+    "translated_title": "Miniscript support in Output Descriptors (part 1)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7WCfiugvx2WNSsRFf'}"
+  },
+  {
+    "title": "Split hashing/index `GetUTXOStats` codepaths, decouple from `coinstatsindex`",
+    "url": "https://bitcoincore.reviews/24410",
+    "translated_title": "Split hashing/index `GetUTXOStats` codepaths, decouple from `coinstatsindex`",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7WdxQUuFRaXM8w8zL'}"
+  },
+  {
+    "title": "Avoid mixing different `OutputTypes` during coin selection",
+    "url": "https://bitcoincore.reviews/24584",
+    "translated_title": "Avoid mixing different `OutputTypes` during coin selection",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7X1nR5KqLUvh7E1vf'}"
+  },
+  {
+    "title": "Add tracepoints and algorithm information to coin selection",
+    "url": "https://bitcoincore.reviews/24644",
+    "translated_title": "Add tracepoints and algorithm information to coin selection",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7XP7CbEnM5PA5jcro'}"
+  },
+  {
+    "title": "bug fix: update for ancestor inclusion using modified fees, not base",
+    "url": "https://bitcoincore.reviews/24538",
+    "translated_title": "bug fix: update for ancestor inclusion using modified fees, not base",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7XmvEKF2M5kjw7TPW'}"
+  },
+  {
+    "title": "Improve Indices on pruned nodes via prune blockers",
+    "url": "https://bitcoincore.reviews/21726",
+    "translated_title": "Improve Indices on pruned nodes via prune blockers",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Y8Fq99Lmae3Vgrc3'}"
+  },
+  {
+    "title": "Prevent block index fingerprinting by sending additional getheaders messages",
+    "url": "https://bitcoincore.reviews/24571",
+    "translated_title": "Prevent block index fingerprinting by sending additional getheaders messages",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7YUbEGdMi37YdyeWT'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 23.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 23.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7Z34zHfMAAGpT7NAE'}"
+  },
+  {
+    "title": "LLVM 14 & LLD based macOS toolchain",
+    "url": "https://bitcoincore.reviews/21778",
+    "translated_title": "LLVM 14 & LLD based macOS toolchain",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7ZTsBKLoyAS2aemz2'}"
+  },
+  {
+    "title": "Add 'sendall' RPC née sweep",
+    "url": "https://bitcoincore.reviews/24118",
+    "translated_title": "Add 'sendall' RPC née sweep",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7ZxPNRdSs4m9hHmqv'}"
+  },
+  {
+    "title": "Migrate legacy wallets to descriptor wallets",
+    "url": "https://bitcoincore.reviews/19602",
+    "translated_title": "Migrate legacy wallets to descriptor wallets",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7aLCvAPX2vzsEodJs'}"
+  },
+  {
+    "title": "Delete anchors.dat after trying to connect to that peers",
+    "url": "https://bitcoincore.reviews/24034",
+    "translated_title": "Delete anchors.dat after trying to connect to that peers",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7ag3ZKeqQMp5Kn5KK'}"
+  },
+  {
+    "title": "Use query parameters to control resource loading",
+    "url": "https://bitcoincore.reviews/24098",
+    "translated_title": "Use query parameters to control resource loading",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7b4rkNsTDnd4zf7Xs'}"
+  },
+  {
+    "title": "Open p2p connections to nodes that listen on non-default ports",
+    "url": "https://bitcoincore.reviews/23542",
+    "translated_title": "Open p2p connections to nodes that listen on non-default ports",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7bRgxG2h1BaHPzj3C'}"
+  },
+  {
+    "title": "CPFP fee bumping within packages",
+    "url": "https://bitcoincore.reviews/24152",
+    "translated_title": "CPFP fee bumping within packages",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7bwwfbBRaSdcsWC2L'}"
+  },
+  {
+    "title": "Libsecp256k1 #748 Add usage examples",
+    "url": "https://bitcoincore.reviews/748",
+    "translated_title": "Libsecp256k1 #748 Add usage examples",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7cKmUAoudN3FZq5kB'}"
+  },
+  {
+    "title": "Allow tx replacement by smaller witness",
+    "url": "https://bitcoincore.reviews/24007",
+    "translated_title": "Allow tx replacement by smaller witness",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7cmJpiUiZ4hGGRqDn'}"
+  },
+  {
+    "title": "Allow users to specify input weights when funding a transaction",
+    "url": "https://bitcoincore.reviews/23201",
+    "translated_title": "Allow users to specify input weights when funding a transaction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7d8ddDvWAb8UhY9at'}"
+  },
+  {
+    "title": "Add DISABLETX message for negotiating block-relay-only connections",
+    "url": "https://bitcoincore.reviews/20726",
+    "translated_title": "Add DISABLETX message for negotiating block-relay-only connections",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7dzyJkHF86rZhJTtq'}"
+  },
+  {
+    "title": "Allow negative effective value inputs when subtracting fee from outputs",
+    "url": "https://bitcoincore.reviews/23534",
+    "translated_title": "Allow negative effective value inputs when subtracting fee from outputs",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7eLK2tT2kBztzVSPP'}"
+  },
+  {
+    "title": "During IBD, prune as much as possible until we get close to where we will eventually keep blocks",
+    "url": "https://bitcoincore.reviews/20827",
+    "translated_title": "During IBD, prune as much as possible until we get close to where we will eventually keep blocks",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7eo6UfBVDjhLTKZ6z'}"
+  },
+  {
+    "title": "Add systemtap's sys/sdt.h as depends for GUIX builds with USDT tracepoints",
+    "url": "https://bitcoincore.reviews/23724",
+    "translated_title": "Add systemtap's sys/sdt.h as depends for GUIX builds with USDT tracepoints",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7fL6SCihTMvcEuu3C'}"
+  },
+  {
+    "title": "Erlay support signaling",
+    "url": "https://bitcoincore.reviews/23443",
+    "translated_title": "Erlay support signaling",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7fgRaoqUQ2CecTgHd'}"
+  },
+  {
+    "title": "Multiprocess bitcoin",
+    "url": "https://bitcoincore.reviews/10102",
+    "translated_title": "Multiprocess bitcoin",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7g4F5u5BLdU5Xrwtq'}"
+  },
+  {
+    "title": "Add unit test for block-relay-only eviction",
+    "url": "https://bitcoincore.reviews/23614",
+    "translated_title": "Add unit test for block-relay-only eviction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7gQ5jtzdJXaqwd7Wh'}"
+  },
+  {
+    "title": "Treat taproot as always active",
+    "url": "https://bitcoincore.reviews/23512",
+    "translated_title": "Treat taproot as always active",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7gkAfFGT6vWpLbh8v'}"
+  },
+  {
+    "title": "Return fee and prevout (utxos) to getrawtransaction",
+    "url": "https://bitcoincore.reviews/23319",
+    "translated_title": "Return fee and prevout (utxos) to getrawtransaction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7h71BnBBk32ZTsK8q'}"
+  },
+  {
+    "title": "Coalesce Chainstate loading sequence between {,non-}unittest codepaths",
+    "url": "https://bitcoincore.reviews/23280",
+    "translated_title": "Coalesce Chainstate loading sequence between {,non-}unittest codepaths",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7hVZpbzEFatp6ZKoq'}"
+  },
+  {
+    "title": "Add `ChainstateManager::ProcessTransaction`",
+    "url": "https://bitcoincore.reviews/23173",
+    "translated_title": "Add `ChainstateManager::ProcessTransaction`",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7hquNxduunkoJ98BU'}"
+  },
+  {
+    "title": "Mempool validation and submission for packages of 1 child + parents",
+    "url": "https://bitcoincore.reviews/22674",
+    "translated_title": "Mempool validation and submission for packages of 1 child + parents",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7iY56ZR3zD4KvRC9d'}"
+  },
+  {
+    "title": "Expose block filters over REST",
+    "url": "https://bitcoincore.reviews/17631",
+    "translated_title": "Expose block filters over REST",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7jJiEa2K6NyBfJ5dm'}"
+  },
+  {
+    "title": "Dedup and RAII-fy the creation of a copy of CConnman::vNodes",
+    "url": "https://bitcoincore.reviews/21943",
+    "translated_title": "Dedup and RAII-fy the creation of a copy of CConnman::vNodes",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7joDt84yLyXxZUhsE'}"
+  },
+  {
+    "title": "Txmempool -/-> validation 1/2: improve performance of check() and remove dependency on validation",
+    "url": "https://bitcoincore.reviews/23157",
+    "translated_title": "Txmempool -/-> validation 1/2: improve performance of check() and remove dependency on validation",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7kAJNW8xZHiFNwqfL'}"
+  },
+  {
+    "title": "Pimpl AddrMan to abstract implementation details",
+    "url": "https://bitcoincore.reviews/22950",
+    "translated_title": "Pimpl AddrMan to abstract implementation details",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7kXP2hLMAUM1kAiNo'}"
+  },
+  {
+    "title": "Discourage CSV as NOP when locktime disable is set & discourage unknown nSequence",
+    "url": "https://bitcoincore.reviews/22871",
+    "translated_title": "Discourage CSV as NOP when locktime disable is set & discourage unknown nSequence",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7kxRaBWdV8V6ZEtAc'}"
+  },
+  {
+    "title": "Cut the validation <-> txmempool circular dependency",
+    "url": "https://bitcoincore.reviews/22677",
+    "translated_title": "Cut the validation <-> txmempool circular dependency",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7mgaYNWtsgPyGoNM7'}"
+  },
+  {
+    "title": "Decide which coin selection solution to use based on waste metric",
+    "url": "https://bitcoincore.reviews/22009",
+    "translated_title": "Decide which coin selection solution to use based on waste metric",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7nCLRXqRMbPzAYy87'}"
+  },
+  {
+    "title": "Extract RBF logic into policy/rbf",
+    "url": "https://bitcoincore.reviews/22675",
+    "translated_title": "Extract RBF logic into policy/rbf",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7nZRFPa4hUzQRfhoT'}"
+  },
+  {
+    "title": "Don't return incorrect replaceability status",
+    "url": "https://bitcoincore.reviews/22665",
+    "translated_title": "Don't return incorrect replaceability status",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7nzi9Tc4RrHNRNS9m'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 22.0 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 22.0 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7oMnbzgxqC6GCQBrE'}"
+  },
+  {
+    "title": "RPC getblockfrompeer",
+    "url": "https://bitcoincore.reviews/20295",
+    "translated_title": "RPC getblockfrompeer",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7oj7W68t8Xg4g7HFR'}"
+  },
+  {
+    "title": "Use legacy relaying to download blocks in blocks-only mode",
+    "url": "https://bitcoincore.reviews/22340",
+    "translated_title": "Use legacy relaying to download blocks in blocks-only mode",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7p8BAgSotJGZpHsky'}"
+  },
+  {
+    "title": "Add test for subtract fee from recipient behavior",
+    "url": "https://bitcoincore.reviews/22155",
+    "translated_title": "Add test for subtract fee from recipient behavior",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7pUGGtTDfTJXEaBrj'}"
+  },
+  {
+    "title": "Prefer to use txindex if available for GetTransaction",
+    "url": "https://bitcoincore.reviews/22383",
+    "translated_title": "Prefer to use txindex if available for GetTransaction",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7ppbZt52hLW65XSEx'}"
+  },
+  {
+    "title": "Rotate the debug log file",
+    "url": "https://bitcoincore.reviews/22350",
+    "translated_title": "Rotate the debug log file",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7qP5SjVvTHxc694ks'}"
+  },
+  {
+    "title": "GDB tutorial notes",
+    "url": "https://bitcoincore.reviews/notes",
+    "translated_title": "GDB tutorial notes",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7qqcW3z13uH8LA1LB'}"
+  },
+  {
+    "title": "Use `script_util` helpers for creating P2{PKH,SH,WPKH,WSH} scripts",
+    "url": "https://bitcoincore.reviews/22363",
+    "translated_title": "Use `script_util` helpers for creating P2{PKH,SH,WPKH,WSH} scripts",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7t63ZWke4LsRFfpgF'}"
+  },
+  {
+    "title": "Default to NODE_WITNESS in nLocalServices",
+    "url": "https://bitcoincore.reviews/21090",
+    "translated_title": "Default to NODE_WITNESS in nLocalServices",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7tTsco5rPVCC7WZn6'}"
+  },
+  {
+    "title": "Two small fixes to node broadcast logic",
+    "url": "https://bitcoincore.reviews/22261",
+    "translated_title": "Two small fixes to node broadcast logic",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7tx9F53bJtGrx9UtD'}"
+  },
+  {
+    "title": "Mitigate disk filling attacks by rate limiting LogPrintf",
+    "url": "https://bitcoincore.reviews/21603",
+    "translated_title": "Mitigate disk filling attacks by rate limiting LogPrintf",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7uKxgiJgPabjU4wck'}"
+  },
+  {
+    "title": "Mempool/validation: mempool ancestor/descendant limits for packages",
+    "url": "https://bitcoincore.reviews/21800",
+    "translated_title": "Mempool/validation: mempool ancestor/descendant limits for packages",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7uj2LUSeV83eX75Bz'}"
+  },
+  {
+    "title": "Net_processing: lock clean up",
+    "url": "https://bitcoincore.reviews/21527",
+    "translated_title": "Net_processing: lock clean up",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7v9pcnb3ZqXbf8B8F'}"
+  },
+  {
+    "title": "Tracing: first tracepoints and documentation on User-Space, Statically Defined Tracing (USDT)",
+    "url": "https://bitcoincore.reviews/22006",
+    "translated_title": "Tracing: first tracepoints and documentation on User-Space, Statically Defined Tracing (USDT)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7vWA2HQhrcjfmoHxu'}"
+  },
+  {
+    "title": "Increase OUTPUT_GROUP_MAX_ENTRIES to 100",
+    "url": "https://bitcoincore.reviews/18418",
+    "translated_title": "Increase OUTPUT_GROUP_MAX_ENTRIES to 100",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7w1RDrfXuwC1suKSC'}"
+  },
+  {
+    "title": "[bundle 6/n] Prune g_chainman usage in auxiliary modules",
+    "url": "https://bitcoincore.reviews/21767",
+    "translated_title": "[bundle 6/n] Prune g_chainman usage in auxiliary modules",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7wN11FLv2TiZ36hiQ'}"
+  },
+  {
+    "title": "Use Single Random Draw in addition to knapsack as coin selection fallback",
+    "url": "https://bitcoincore.reviews/17526",
+    "translated_title": "Use Single Random Draw in addition to knapsack as coin selection fallback",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7wjpX7WK9ESe8p5AJ'}"
+  },
+  {
+    "title": "Use effective values throughout coin selection",
+    "url": "https://bitcoincore.reviews/17331",
+    "translated_title": "Use effective values throughout coin selection",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7x5uciywAU6EKkpoP'}"
+  },
+  {
+    "title": "Minisketch C++ code",
+    "url": "https://bitcoincore.reviews/minisketch",
+    "translated_title": "Minisketch C++ code",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7xVxjxEDnoemGB6LX'}"
+  },
+  {
+    "title": "Include coinbase transactions in receivedby RPCs",
+    "url": "https://bitcoincore.reviews/14707",
+    "translated_title": "Include coinbase transactions in receivedby RPCs",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7y7uzzCpUdt5zYmhY'}"
+  },
+  {
+    "title": "Introduce node rebroadcast module",
+    "url": "https://bitcoincore.reviews/21061",
+    "translated_title": "Introduce node rebroadcast module",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7yeRECqZ7oseC7rVU'}"
+  },
+  {
+    "title": "Reduce addr blackholes",
+    "url": "https://bitcoincore.reviews/21528",
+    "translated_title": "Reduce addr blackholes",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu7zTHFiLwtEYBb9Pfi'}"
+  },
+  {
+    "title": "Introduce deploymentstatus",
+    "url": "https://bitcoincore.reviews/19438",
+    "translated_title": "Introduce deploymentstatus",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu818TmDBDLMzFA1kGG'}"
+  },
+  {
+    "title": "Add tx_pool fuzz target",
+    "url": "https://bitcoincore.reviews/21142",
+    "translated_title": "Add tx_pool fuzz target",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu81XGycjWkeMMughoZ'}"
+  },
+  {
+    "title": "BIP 350: Implement Bech32m and use it for v1+ segwit addresses",
+    "url": "https://bitcoincore.reviews/20861",
+    "translated_title": "BIP 350: Implement Bech32m and use it for v1+ segwit addresses",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu81uM26TdDw8Yo2Dpr'}"
+  },
+  {
+    "title": "Add Python implementation of Minisketch, part 2",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "Add Python implementation of Minisketch, part 2",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu82MdYkHTP74fVsxGi'}"
+  },
+  {
+    "title": "Halt processing of unrequested transactions",
+    "url": "https://bitcoincore.reviews/21224",
+    "translated_title": "Halt processing of unrequested transactions",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu82pAZcrrAaHgv7s7q'}"
+  },
+  {
+    "title": "Add Python implementation of Minisketch, part 1",
+    "url": "https://bitcoincore.reviews/26",
+    "translated_title": "Add Python implementation of Minisketch, part 1",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu83LuxpZPE22pnCoDS'}"
+  },
+  {
+    "title": "Erlay: bandwidth-efficient transaction relay protocol",
+    "url": "https://bitcoincore.reviews/18261",
+    "translated_title": "Erlay: bandwidth-efficient transaction relay protocol",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu83ohUsF8yr6SorNBx'}"
+  },
+  {
+    "title": "Move ping data to net_processing",
+    "url": "https://bitcoincore.reviews/20721",
+    "translated_title": "Move ping data to net_processing",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu84B1ydbRiGdXDWQqh'}"
+  },
+  {
+    "title": "Enable packages through testmempoolaccept",
+    "url": "https://bitcoincore.reviews/20833",
+    "translated_title": "Enable packages through testmempoolaccept",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu84ZLikqSjZnEmoBDL'}"
+  },
+  {
+    "title": "Check for non-representable CFeeRates",
+    "url": "https://bitcoincore.reviews/20546",
+    "translated_title": "Check for non-representable CFeeRates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8537KCq9h1X7gPVa6'}"
+  },
+  {
+    "title": "Simpler setban and new ban manipulation commands",
+    "url": "https://bitcoincore.reviews/19825",
+    "translated_title": "Simpler setban and new ban manipulation commands",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu85Xsyw5tP5V6NLEFh'}"
+  },
+  {
+    "title": "Only support compact blocks with witnesses",
+    "url": "https://bitcoincore.reviews/20799",
+    "translated_title": "Only support compact blocks with witnesses",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu85uhWZccEHmk6Cj5i'}"
+  },
+  {
+    "title": "Testing Bitcoin Core 0.21 Release Candidates",
+    "url": "https://bitcoincore.reviews/testing",
+    "translated_title": "Testing Bitcoin Core 0.21 Release Candidates",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu86KkdjDwAgYKRyUiw'}"
+  },
+  {
+    "title": "Move SaltedHashers to separate file and add some new ones",
+    "url": "https://bitcoincore.reviews/19935",
+    "translated_title": "Move SaltedHashers to separate file and add some new ones",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu86k42KeYcNP8zZYyg'}"
+  },
+  {
+    "title": "Add unit testing of node eviction logic",
+    "url": "https://bitcoincore.reviews/20477",
+    "translated_title": "Add unit testing of node eviction logic",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu87EKhjznMJBy8sqHD'}"
+  },
+  {
+    "title": "Apply strict verification flags for transaction tests and assert backwards compatibility",
+    "url": "https://bitcoincore.reviews/19698",
+    "translated_title": "Apply strict verification flags for transaction tests and assert backwards compatibility",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu87ctS9P2ndBMnLGbo'}"
+  },
+  {
+    "title": "Periodically make block-relay connections and sync headers",
+    "url": "https://bitcoincore.reviews/19858",
+    "translated_title": "Periodically make block-relay connections and sync headers",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu87zxTNnotVE5SxDYU'}"
+  },
+  {
+    "title": "Treat handshake misbehavior like unknown message",
+    "url": "https://bitcoincore.reviews/20079",
+    "translated_title": "Treat handshake misbehavior like unknown message",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu88TjioEJuRHM6qx9G'}"
+  },
+  {
+    "title": "Allow outbound & block-relay-only connections in functional tests",
+    "url": "https://bitcoincore.reviews/19315",
+    "translated_title": "Allow outbound & block-relay-only connections in functional tests",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu88oabyMtUgh45WYpr'}"
+  },
+  {
+    "title": "Remove dead CheckForkWarningConditionsOnNewFork",
+    "url": "https://bitcoincore.reviews/19905",
+    "translated_title": "Remove dead CheckForkWarningConditionsOnNewFork",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu89Auc9jeG7pFJBdTy'}"
+  },
+  {
+    "title": "De-globalize ChainstateManager",
+    "url": "https://bitcoincore.reviews/20158",
+    "translated_title": "De-globalize ChainstateManager",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu89ai62pzLW1L14WkR'}"
+  },
+  {
+    "title": "Add MuHash3072 implementation",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "Add MuHash3072 implementation",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8A6xZby2qQqdszJ28'}"
+  },
+  {
+    "title": "Implement BIP 340-342 validation - Implement Tapscript script validation rules (BIP 342)",
+    "url": "https://bitcoincore.reviews/19953",
+    "translated_title": "Implement BIP 340-342 validation - Implement Tapscript script validation rules (BIP 342)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8AfCUzSS6ozYWmdpj'}"
+  },
+  {
+    "title": "Refactoring and minor improvement for self-advertisements",
+    "url": "https://bitcoincore.reviews/19843",
+    "translated_title": "Refactoring and minor improvement for self-advertisements",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8B8EBCLqKi7yTueFs'}"
+  },
+  {
+    "title": "Calculate fees in getblock using BlockUndo data",
+    "url": "https://bitcoincore.reviews/18772",
+    "translated_title": "Calculate fees in getblock using BlockUndo data",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Ce1cbruQYvuWA4cn'}"
+  },
+  {
+    "title": "Improve sed robustness by not using sed",
+    "url": "https://bitcoincore.reviews/19761",
+    "translated_title": "Improve sed robustness by not using sed",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Cz6oBpLZiYfzL952'}"
+  },
+  {
+    "title": "Add support to (un)serialize as ADDRv2",
+    "url": "https://bitcoincore.reviews/19845",
+    "translated_title": "Add support to (un)serialize as ADDRv2",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8DMvBHnEtHE6uyGwg'}"
+  },
+  {
+    "title": "BIP-325: Signet",
+    "url": "https://bitcoincore.reviews/18267",
+    "translated_title": "BIP-325: Signet",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8DpCdNbAubBmxd8YT'}"
+  },
+  {
+    "title": "Implement BIP 340-342 validation - Implement Taproot validation (BIP 341)",
+    "url": "https://bitcoincore.reviews/3",
+    "translated_title": "Implement BIP 340-342 validation - Implement Taproot validation (BIP 341)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8EcptdF8M28FuNUmp'}"
+  },
+  {
+    "title": "Re-delegate absurd fee checking from mempool to clients",
+    "url": "https://bitcoincore.reviews/19339",
+    "translated_title": "Re-delegate absurd fee checking from mempool to clients",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8FEXn8g3yDvTb1AK8'}"
+  },
+  {
+    "title": "Per-peer Message Logging",
+    "url": "https://bitcoincore.reviews/19509",
+    "translated_title": "Per-peer Message Logging",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8FoWuRjBfNdB76aja'}"
+  },
+  {
+    "title": "Implement BIP 340-342 validation - Support for Schnorr Signatures and integration in SignatureCheckers",
+    "url": "https://bitcoincore.reviews/2",
+    "translated_title": "Implement BIP 340-342 validation - Support for Schnorr Signatures and integration in SignatureCheckers",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8GEK9WnV1PxVuTLB8'}"
+  },
+  {
+    "title": "Multiprocess: Add basic spawn and IPC support",
+    "url": "https://bitcoincore.reviews/19160",
+    "translated_title": "Multiprocess: Add basic spawn and IPC support",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8GpXqCp1ppEYxm4nD'}"
+  },
+  {
+    "title": "Implement BIP 340-342 validation - Implement Taproot signature hashing",
+    "url": "https://bitcoincore.reviews/17977",
+    "translated_title": "Implement BIP 340-342 validation - Implement Taproot signature hashing",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8HR14gQYc8oSBdC8z'}"
+  },
+  {
+    "title": "Make orphan processing interruptible",
+    "url": "https://bitcoincore.reviews/15644",
+    "translated_title": "Make orphan processing interruptible",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8J1xv3HDSKUzxdBe3'}"
+  },
+  {
+    "title": "Implement ADDRv2 support (part of BIP155)",
+    "url": "https://bitcoincore.reviews/19031",
+    "translated_title": "Implement ADDRv2 support (part of BIP155)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8JmriYvGGSvSBLm3m'}"
+  },
+  {
+    "title": "Only allow getdata of recently announced invs",
+    "url": "https://bitcoincore.reviews/19109",
+    "translated_title": "Only allow getdata of recently announced invs",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8KAApv3VcCCat8FNb'}"
+  },
+  {
+    "title": "Cache responses to GETADDR to prevent topology leaks",
+    "url": "https://bitcoincore.reviews/18991",
+    "translated_title": "Cache responses to GETADDR to prevent topology leaks",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8KXkP2xrKcatkSNya'}"
+  },
+  {
+    "title": "Span improvements",
+    "url": "https://bitcoincore.reviews/18468",
+    "translated_title": "Span improvements",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8KxYYoebvJmY9invE'}"
+  },
+  {
+    "title": "Add BIP324 encrypted p2p transport de-/serializer (only used in tests)",
+    "url": "https://bitcoincore.reviews/18242",
+    "translated_title": "Add BIP324 encrypted p2p transport de-/serializer (only used in tests)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8LPLqquRzWw6ZiBHt'}"
+  },
+  {
+    "title": "Add Muhash3072 implementation in Python",
+    "url": "https://bitcoincore.reviews/19105",
+    "translated_title": "Add Muhash3072 implementation in Python",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Lo9RNhy5R7cH3bHL'}"
+  },
+  {
+    "title": "BIP 157: Signal support for compact block filters with NODE_COMPACT_FILTERS",
+    "url": "https://bitcoincore.reviews/19070",
+    "translated_title": "BIP 157: Signal support for compact block filters with NODE_COMPACT_FILTERS",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8MDT6ifvaGzkfjwap'}"
+  },
+  {
+    "title": "Connection eviction logic tests",
+    "url": "https://bitcoincore.reviews/16756",
+    "translated_title": "Connection eviction logic tests",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8MiTqvAW5toedJ2zH'}"
+  },
+  {
+    "title": "Calculate UTXO set hash using Muhash",
+    "url": "https://bitcoincore.reviews/19055",
+    "translated_title": "Calculate UTXO set hash using Muhash",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8NExejfHhRCwrJryr'}"
+  },
+  {
+    "title": "BIP 157: Add support for getcfheaders",
+    "url": "https://bitcoincore.reviews/19010",
+    "translated_title": "BIP 157: Add support for getcfheaders",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8NnhbTuJ8VCobjemj'}"
+  },
+  {
+    "title": "Immediately disconnect on invalid net message checksum",
+    "url": "https://bitcoincore.reviews/15206",
+    "translated_title": "Immediately disconnect on invalid net message checksum",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8P9HYCT1awy8bQ5h2'}"
+  },
+  {
+    "title": "BIP 157: Add compact block filter headers cache",
+    "url": "https://bitcoincore.reviews/18960",
+    "translated_title": "BIP 157: Add compact block filter headers cache",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8PWcf86yiQgU9gHKR'}"
+  },
+  {
+    "title": "Keep inactive seeds after sethdseed and derive keys from them as needed",
+    "url": "https://bitcoincore.reviews/17681",
+    "translated_title": "Keep inactive seeds after sethdseed and derive keys from them as needed",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Q4MHYjP8wjGwA3zX'}"
+  },
+  {
+    "title": "BIP 157: Serve cfcheckpt requests",
+    "url": "https://bitcoincore.reviews/18877",
+    "translated_title": "BIP 157: Serve cfcheckpt requests",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8QmX3VXrGA6S9J9vB'}"
+  },
+  {
+    "title": "Remove is{Empty,Full} flags from CBloomFilter, clarify CVE fix",
+    "url": "https://bitcoincore.reviews/18806",
+    "translated_title": "Remove is{Empty,Full} flags from CBloomFilter, clarify CVE fix",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8RE3mRWAtC9Cg4PUK'}"
+  },
+  {
+    "title": "Mempool tracks locally submitted transactions to improve wallet privacy",
+    "url": "https://bitcoincore.reviews/18038",
+    "translated_title": "Mempool tracks locally submitted transactions to improve wallet privacy",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8RgazJBEzD1edjHpY'}"
+  },
+  {
+    "title": "Flush undo files after last block write",
+    "url": "https://bitcoincore.reviews/17994",
+    "translated_title": "Flush undo files after last block write",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8S49sXcm6vdKpzAqX'}"
+  },
+  {
+    "title": "Add process_messages fuzz harness",
+    "url": "https://bitcoincore.reviews/18521",
+    "translated_title": "Add process_messages fuzz harness",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Svk7AcseLV4Atgi4'}"
+  },
+  {
+    "title": "Add multiwallet balances rpc, use it in -getinfo, no longer depend on getwalletinfo balance",
+    "url": "https://bitcoincore.reviews/18453",
+    "translated_title": "Add multiwallet balances rpc, use it in -getinfo, no longer depend on getwalletinfo balance",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8TH5FtEnbgGgN4F49'}"
+  },
+  {
+    "title": "Initialize PrecomputedTransactionData in CheckInputScripts and Move single-sig checking EvalScript code to EvalChecksig",
+    "url": "https://bitcoincore.reviews/18401",
+    "translated_title": "Initialize PrecomputedTransactionData in CheckInputScripts and Move single-sig checking EvalScript code to EvalChecksig",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8TeQJrTCmVJyJ5c4P'}"
+  },
+  {
+    "title": "Retry notfounds with more urgency",
+    "url": "https://bitcoincore.reviews/18238",
+    "translated_title": "Retry notfounds with more urgency",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8U2UCKUqSuzbWMpXq'}"
+  },
+  {
+    "title": "Don't allow a coin to be spent and FRESH. Improve commenting.",
+    "url": "https://bitcoincore.reviews/18113",
+    "translated_title": "Don't allow a coin to be spent and FRESH. Improve commenting.",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8UVWA3YKns5bVtYFa'}"
+  },
+  {
+    "title": "Improve coin selection for destination groups >10",
+    "url": "https://bitcoincore.reviews/17824",
+    "translated_title": "Improve coin selection for destination groups >10",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8UspdcX52zJK21xAX'}"
+  },
+  {
+    "title": "Improve runtime performance of --reindex",
+    "url": "https://bitcoincore.reviews/16981",
+    "translated_title": "Improve runtime performance of --reindex",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8VL7A9g3yUJAiLp5t'}"
+  },
+  {
+    "title": "Try to preserve outbound block-relay-only connections during restart",
+    "url": "https://bitcoincore.reviews/17428",
+    "translated_title": "Try to preserve outbound block-relay-only connections during restart",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Vhvf5AFJvJBaeX47'}"
+  },
+  {
+    "title": "Remove calls to Chain::Lock methods",
+    "url": "https://bitcoincore.reviews/17954",
+    "translated_title": "Remove calls to Chain::Lock methods",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8WDvtKj3fhfKhAFXq'}"
+  },
+  {
+    "title": "O(1) OP_IF/NOTIF/ELSE/ENDIF script implementation / Abstract out script execution out of VerifyWitnessProgram()",
+    "url": "https://bitcoincore.reviews/16902",
+    "translated_title": "O(1) OP_IF/NOTIF/ELSE/ENDIF script implementation / Abstract out script execution out of VerifyWitnessProgram()",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8X81UHN4wV2swtvki'}"
+  },
+  {
+    "title": "Use wtxid for transaction relay",
+    "url": "https://bitcoincore.reviews/18044",
+    "translated_title": "Use wtxid for transaction relay",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8XWZzfcu86GBiBonk'}"
+  },
+  {
+    "title": "Coins: allow Flush() without cache drop",
+    "url": "https://bitcoincore.reviews/17487",
+    "translated_title": "Coins: allow Flush() without cache drop",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8XudpY2hJuzotr3Ai'}"
+  },
+  {
+    "title": "Remove the mempool's NotifyEntryAdded and NotifyEntryRemoved signals",
+    "url": "https://bitcoincore.reviews/17477",
+    "translated_title": "Remove the mempool's NotifyEntryAdded and NotifyEntryRemoved signals",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8YfmwUAeLF8wRWWjM'}"
+  },
+  {
+    "title": "Fuzz: BIP 42, BIP 30, CVE-2018-17144",
+    "url": "https://bitcoincore.reviews/17860",
+    "translated_title": "Fuzz: BIP 42, BIP 30, CVE-2018-17144",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Z3MK5qtQ9TQDWZ4r'}"
+  },
+  {
+    "title": "Add address-based index (attempt 4?)",
+    "url": "https://bitcoincore.reviews/14053",
+    "translated_title": "Add address-based index (attempt 4?)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8Zeohmkmr4imGbq1N'}"
+  },
+  {
+    "title": "Add make check-valgrind to run the unit tests under Valgrind",
+    "url": "https://bitcoincore.reviews/17639",
+    "translated_title": "Add make check-valgrind to run the unit tests under Valgrind",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8a1PRLuf98wdjMrDt'}"
+  },
+  {
+    "title": "Supplying and using asmap to improve IP bucketing in addrman",
+    "url": "https://bitcoincore.reviews/16702",
+    "translated_title": "Supplying and using asmap to improve IP bucketing in addrman",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8aaNNMaMprR7usysm'}"
+  },
+  {
+    "title": "Reverse cs_main, cs_wallet lock order and reduce cs_main locking",
+    "url": "https://bitcoincore.reviews/16426",
+    "translated_title": "Reverse cs_main, cs_wallet lock order and reduce cs_main locking",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8axSMf23EtF3uCwfv'}"
+  },
+  {
+    "title": "Rework rebroadcast logic to improve privacy",
+    "url": "https://bitcoincore.reviews/16698",
+    "translated_title": "Rework rebroadcast logic to improve privacy",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8bQivisRzcmjhHL7N'}"
+  },
+  {
+    "title": "Serve BIP 157 compact filters",
+    "url": "https://bitcoincore.reviews/16442",
+    "translated_title": "Serve BIP 157 compact filters",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8c88n1tHXzHKBZWpN'}"
+  },
+  {
+    "title": "Stop relaying non-mempool txs, improve tx privacy slightly",
+    "url": "https://bitcoincore.reviews/17303",
+    "translated_title": "Stop relaying non-mempool txs, improve tx privacy slightly",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8cZvm87HkrH3C1rFH'}"
+  },
+  {
+    "title": "Fast rescan with BIP157 block filters",
+    "url": "https://bitcoincore.reviews/15845",
+    "translated_title": "Fast rescan with BIP157 block filters",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8cxzHr1u1gJ5NMyCe'}"
+  },
+  {
+    "title": "Tidy up ValidationState interface",
+    "url": "https://bitcoincore.reviews/15921",
+    "translated_title": "Tidy up ValidationState interface",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8dPndp8N6Xq7W2SkZ'}"
+  },
+  {
+    "title": "Merge settings one place instead of five places",
+    "url": "https://bitcoincore.reviews/15934",
+    "translated_title": "Merge settings one place instead of five places",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8djdHBrB31NCqETMJ'}"
+  },
+  {
+    "title": "Return the AcceptBlock CValidationState directly in ProcessNewBlock",
+    "url": "https://bitcoincore.reviews/16279",
+    "translated_title": "Return the AcceptBlock CValidationState directly in ProcessNewBlock",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8e8SYWTHkXwoRgQLs'}"
+  },
+  {
+    "title": "Delay querying DNS seeds if addrman is populated",
+    "url": "https://bitcoincore.reviews/16939",
+    "translated_title": "Delay querying DNS seeds if addrman is populated",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8etpuS3SPn8o6M4j3'}"
+  },
+  {
+    "title": "Package relay",
+    "url": "https://bitcoincore.reviews/16401",
+    "translated_title": "Package relay",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8fdipPrj8QHegvJxK'}"
+  },
+  {
+    "title": "Refactor network message deserialization",
+    "url": "https://bitcoincore.reviews/16202",
+    "translated_title": "Refactor network message deserialization",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8fzJcq999gg28RxW3'}"
+  },
+  {
+    "title": "Add Open External Wallet action",
+    "url": "https://bitcoincore.reviews/15204",
+    "translated_title": "Add Open External Wallet action",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8gMdZC1rWrbgmw58W'}"
+  },
+  {
+    "title": "Add validation interface logging",
+    "url": "https://bitcoincore.reviews/16688",
+    "translated_title": "Add validation interface logging",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8gmwHSLhjAUg9MEsp'}"
+  },
+  {
+    "title": "Shuffle inputs and outputs after joining psbts",
+    "url": "https://bitcoincore.reviews/16512",
+    "translated_title": "Shuffle inputs and outputs after joining psbts",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8hMAaQkJAYNY2mNRv'}"
+  },
+  {
+    "title": "Add 2 outbound blocks-only connections",
+    "url": "https://bitcoincore.reviews/15759",
+    "translated_title": "Add 2 outbound blocks-only connections",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8hmDQB8BKvKGoSa9g'}"
+  },
+  {
+    "title": "Remove GetDepthInMainChain dependency on locked chain interface",
+    "url": "https://bitcoincore.reviews/15931",
+    "translated_title": "Remove GetDepthInMainChain dependency on locked chain interface",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8iAXMw9JBEQKuDNg3'}"
+  },
+  {
+    "title": "On bitcoind startup, write config args to debug.log",
+    "url": "https://bitcoincore.reviews/16115",
+    "translated_title": "On bitcoind startup, write config args to debug.log",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8irhUqkXoRkLGREkq'}"
+  },
+  {
+    "title": "Add getblockbyheight method / support @height in place of blockhash for getblock etc",
+    "url": "https://bitcoincore.reviews/16345",
+    "translated_title": "Add getblockbyheight method / support @height in place of blockhash for getblock etc",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8jFGFS1xj65ufC3KP'}"
+  },
+  {
+    "title": "Request NOTFOUND transactions immediately from other outbound peers, when possible",
+    "url": "https://bitcoincore.reviews/15505",
+    "translated_title": "Request NOTFOUND transactions immediately from other outbound peers, when possible",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8jbr8cfsnUKt7rnxy'}"
+  },
+  {
+    "title": "Replace chain relayTransactions/submitMemoryPool by higher method",
+    "url": "https://bitcoincore.reviews/15713",
+    "translated_title": "Replace chain relayTransactions/submitMemoryPool by higher method",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8jxRqRS835TYFKDk4'}"
+  },
+  {
+    "title": "Parallelize CheckInputs() in AcceptToMemoryPool()",
+    "url": "https://bitcoincore.reviews/15169",
+    "translated_title": "Parallelize CheckInputs() in AcceptToMemoryPool()",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8kKWMQXbqce1YCifi'}"
+  },
+  {
+    "title": "Move wallet creation out of the createwallet rpc into its own function",
+    "url": "https://bitcoincore.reviews/16244",
+    "translated_title": "Move wallet creation out of the createwallet rpc into its own function",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8kgq1FHXqMjHC2CvD'}"
+  },
+  {
+    "title": "Add getdescriptorinfo functional test",
+    "url": "https://bitcoincore.reviews/15443",
+    "translated_title": "Add getdescriptorinfo functional test",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8m2fn1xLskqaYvKMa'}"
+  },
+  {
+    "title": "Allow one extra single-ancestor transaction per package",
+    "url": "https://bitcoincore.reviews/15681",
+    "translated_title": "Allow one extra single-ancestor transaction per package",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8mNWLWCySqKV1fcEA'}"
+  },
+  {
+    "title": "Restrict timestamp when mining a diff-adjustment block to prev-600",
+    "url": "https://bitcoincore.reviews/15481",
+    "translated_title": "Restrict timestamp when mining a diff-adjustment block to prev-600",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8mma4X35TGUiSHTkc'}"
+  },
+  {
+    "title": "Deprecate totalfee argument in `bumpfee`",
+    "url": "https://bitcoincore.reviews/15996",
+    "translated_title": "Deprecate totalfee argument in `bumpfee`",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8n7eqFgE74pjJf5VV'}"
+  },
+  {
+    "title": "Bury bip9 deployments",
+    "url": "https://bitcoincore.reviews/16060",
+    "translated_title": "Bury bip9 deployments",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8nUEqh5RH3ye5Gk91'}"
+  },
+  {
+    "title": "Batch write imported stuff in importmulti",
+    "url": "https://bitcoincore.reviews/15741",
+    "translated_title": "Batch write imported stuff in importmulti",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8npa5ToRdzUmUHs1c'}"
+  },
+  {
+    "title": "Create wallet menu option",
+    "url": "https://bitcoincore.reviews/15450",
+    "translated_title": "Create wallet menu option",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8oCdyEcwNBPw6WNVi'}"
+  },
+  {
+    "title": "Fix NOTFOUND bug and expire getdata requests for transactions",
+    "url": "https://bitcoincore.reviews/15834",
+    "translated_title": "Fix NOTFOUND bug and expire getdata requests for transactions",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8oYj2N7djEJKtNGsM'}"
+  },
+  {
+    "title": "Allow all mempool txs to be replaced after a configurable timeout (default 6h)",
+    "url": "https://bitcoincore.reviews/10823",
+    "translated_title": "Allow all mempool txs to be replaced after a configurable timeout (default 6h)",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8pRZagzYgUWmTWcDz'}"
+  },
+  {
+    "title": "Enhance bumpfee to include inputs when targeting a feerate",
+    "url": "https://bitcoincore.reviews/15557",
+    "translated_title": "Enhance bumpfee to include inputs when targeting a feerate",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CYtu8prc7EdGkMYY2ivWg'}"
   }
 ]
