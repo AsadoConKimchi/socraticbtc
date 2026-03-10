@@ -3,7 +3,7 @@
 import click
 from rich.console import Console
 
-from scrapers import scrape_reviews, scrape_optech
+from scrapers import scrape_reviews, scrape_optech, fetch_reviews, fetch_optech
 from pipeline import translate_content
 
 console = Console()
@@ -23,13 +23,25 @@ def cli():
     help="Source to scrape: 'reviews' (Bitcoin Core PR Review Club) or 'optech' (Optech Newsletter).",
 )
 @click.option("--limit", default=5, help="Number of items to scrape.")
-def scrape(source: str, limit: int):
+@click.option(
+    "--mode",
+    type=click.Choice(["http", "github"]),
+    default="github",
+    help="Fetch mode: 'github' (git clone, default) or 'http' (legacy HTTP scraping).",
+)
+def scrape(source: str, limit: int, mode: str):
     """Scrape content from the specified source."""
-    console.print(f"[bold]Scraping: {source}[/]")
-    if source == "reviews":
-        scrape_reviews(limit=limit)
-    elif source == "optech":
-        scrape_optech(limit=limit)
+    console.print(f"[bold]Scraping: {source} (mode={mode})[/]")
+    if mode == "github":
+        if source == "reviews":
+            fetch_reviews(limit=limit)
+        elif source == "optech":
+            fetch_optech(limit=limit)
+    else:
+        if source == "reviews":
+            scrape_reviews(limit=limit)
+        elif source == "optech":
+            scrape_optech(limit=limit)
 
 
 @cli.command()
@@ -47,12 +59,22 @@ def translate(source: str, limit: int):
 
 
 @cli.command()
-@click.option("--limit", default=5, help="Number of items to scrape per source.")
-def all(limit: int):
-    """Run full pipeline: scrape all sources, then translate."""
-    console.print("[bold]Running full pipeline...[/]")
-    scrape_reviews(limit=limit)
-    scrape_optech(limit=limit)
+@click.option("--limit", default=999, help="Number of items to scrape per source (default: all).")
+@click.option(
+    "--mode",
+    type=click.Choice(["http", "github"]),
+    default="github",
+    help="Fetch mode: 'github' (git clone, default) or 'http' (legacy HTTP scraping).",
+)
+def all(limit: int, mode: str):
+    """Run full pipeline: fetch all sources, then translate."""
+    console.print(f"[bold]Running full pipeline (mode={mode})...[/]")
+    if mode == "github":
+        fetch_reviews(limit=limit)
+        fetch_optech(limit=limit)
+    else:
+        scrape_reviews(limit=limit)
+        scrape_optech(limit=limit)
     translate_content("reviews", limit=limit)
     translate_content("optech", limit=limit)
     console.print("[bold green]Full pipeline complete.[/]")
