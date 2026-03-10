@@ -25,6 +25,21 @@ _FM_BLOCK_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 _FM_KEY_RE = re.compile(r"^(\w[\w-]*):\s*(.*)", re.MULTILINE)
 
 
+_LIQUID_TAG_RE = re.compile(r"\{%[^%]*?%\}", re.DOTALL)
+_LIQUID_VAR_RE = re.compile(r"\{\{[^}]*?\}\}")
+_LIQUID_ATTR_RE = re.compile(r"\{:[^}]*?\}")
+
+
+def _clean_liquid(text: str) -> str:
+    """Liquid 템플릿 태그/변수/속성을 제거해 순수 마크다운만 남긴다."""
+    text = _LIQUID_TAG_RE.sub("", text)
+    text = _LIQUID_VAR_RE.sub("", text)
+    text = _LIQUID_ATTR_RE.sub("", text)
+    # 빈 줄 3개 이상 → 2개로 축소
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
 def _parse_front_matter(text: str) -> tuple[dict, str]:
     """YAML front matter를 파싱해 (metadata_dict, body_text) 반환."""
     m = _FM_BLOCK_RE.match(text)
@@ -82,8 +97,8 @@ def fetch_reviews(limit: int = 200) -> list[dict]:
                 pr_num = md_file.stem.split("-")[-1].lstrip("#")
                 url = f"https://bitcoincore.reviews/{pr_num}"
 
-                # 본문 길이 제한 (번역 비용 고려)
-                content = body.strip()[:8000]
+                # Liquid 태그 제거 후 길이 제한
+                content = _clean_liquid(body)[:8000]
 
                 results.append({
                     "title": title,
@@ -135,7 +150,8 @@ def fetch_optech(limit: int = 300) -> list[dict]:
                     slug = md_file.stem  # YYYY-MM-DD-newsletter-NNN
                     url = f"https://bitcoinops.org/en/newsletters/{slug}/"
 
-                content = body.strip()[:8000]
+                # Liquid 태그 제거 후 길이 제한
+                content = _clean_liquid(body)[:8000]
 
                 results.append({
                     "title": title,
