@@ -82,8 +82,7 @@ def fetch_reviews(limit: int = 200) -> list[dict]:
                 pr_num = md_file.stem.split("-")[-1].lstrip("#")
                 url = f"https://bitcoincore.reviews/{pr_num}"
 
-                # 본문 길이 제한 (번역 비용 고려)
-                content = body.strip()[:8000]
+                content = body.strip()
 
                 results.append({
                     "title": title,
@@ -135,7 +134,7 @@ def fetch_optech(limit: int = 300) -> list[dict]:
                     slug = md_file.stem  # YYYY-MM-DD-newsletter-NNN
                     url = f"https://bitcoinops.org/en/newsletters/{slug}/"
 
-                content = body.strip()[:8000]
+                content = body.strip()
 
                 results.append({
                     "title": title,
