@@ -1,6 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { marked } from 'marked';
+import DetailView from '../../components/DetailView.astro';
 import reviewsRaw from '../../data/reviews.json';
 import reviewsKoRaw from '../../data/reviews_ko.json';
 
@@ -17,64 +16,14 @@ const reviewsKo: any[] = reviewsKoRaw;
 const item = reviews[Number(id)];
 const koMap = Object.fromEntries(reviewsKo.map((r: any) => [r.url, r]));
 const ko = item ? koMap[item.url] : null;
-const isTranslated = ko && !ko.translated_title?.startsWith('[STUB]');
-const isStub = ko?.translated_title?.startsWith('[STUB]');
-
-// date는 item.date 우선, 없으면 null
 const date: string | null = item?.date ?? null;
-
-const displayTitle = isTranslated ? ko.translated_title : item?.title ?? 'Review';
-const pageDescription = isTranslated
-  ? `${ko.translated_title} — Bitcoin Core PR Review 한국어 번역`
-  : `${item?.title ?? ''} — Bitcoin Core PR Review`;
-
-// 콘텐츠를 Markdown으로 파싱
-marked.setOptions({ breaks: true });
-const rawContent = isTranslated ? (ko.translated_content || '') : (item?.content || '');
-const htmlContent = rawContent ? await marked.parse(rawContent) : '';
 ---
 
-<BaseLayout title={displayTitle} description={pageDescription}>
-  {!item ? (
-    <p class="text-gray-400">항목을 찾을 수 없습니다.</p>
-  ) : (
-    <div>
-      <a href="/?tab=reviews" class="text-sm text-gray-500 hover:text-btc mb-6 inline-flex items-center gap-1 transition-colors">
-        ← PR Reviews 목록
-      </a>
-
-      <div class="mt-4 mb-2 flex items-center gap-2 flex-wrap">
-        <span class={`text-xs px-2 py-0.5 rounded-full font-medium ${
-          isTranslated
-            ? 'bg-btc/10 text-btc border border-btc/20'
-            : 'bg-gray-700/50 text-gray-400 border border-gray-600/30'
-        }`}>
-          {isTranslated ? '🤖 LLM 번역' : isStub ? '⏳ Stub (API 키 필요)' : '원문 (영어)'}
-        </span>
-        {date && <span class="text-xs text-gray-500">{date}</span>}
-        <a href={item.url} target="_blank" rel="noopener" class="text-xs text-gray-500 hover:text-btc transition-colors">
-          원문 링크 ↗
-        </a>
-      </div>
-
-      <h1 class="text-xl font-bold text-gray-100 mt-3 mb-6 leading-snug">
-        {displayTitle}
-      </h1>
-
-      {isTranslated && ko.translated_title !== item.title && (
-        <p class="text-xs text-gray-500 -mt-4 mb-6">원문 제목: {item.title}</p>
-      )}
-
-      <div class="border-t border-border pt-6">
-        {isStub && !isTranslated ? (
-          <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-lg p-4 text-yellow-400 text-sm">
-            <p class="font-medium mb-1">⏳ 번역 대기 중</p>
-            <p class="text-yellow-500 text-xs">ANTHROPIC_API_KEY를 설정하고 번역을 다시 실행하면 한국어 번역이 표시됩니다.</p>
-          </div>
-        ) : (
-          <div class="prose prose-invert prose-sm max-w-none text-gray-300 leading-relaxed" set:html={htmlContent || '본문이 없습니다.'} />
-        )}
-      </div>
-    </div>
-  )}
-</BaseLayout>
+<DetailView
+  item={item}
+  ko={ko}
+  date={date}
+  backTab="reviews"
+  backLabel="PR Reviews 목록"
+  typeLabel="Bitcoin Core PR Review"
+/>

@@ -54,15 +54,18 @@ def translate_content(source: str, limit: int = 1) -> list[dict]:
     if not api_key:
         console.print("[yellow]ANTHROPIC_API_KEY not set. Saving stub translations.[/]")
         results = list(existing)
+        existing_urls = {e["url"] for e in results}
         for item in items:
-            if item["url"] not in {e["url"] for e in results}:
+            if item["url"] not in existing_urls:
                 results.append({
                     "title": item["title"],
                     "url": item["url"],
                     "translated_title": f"[STUB] {item['title']}",
                     "translated_content": "[STUB] Translation requires ANTHROPIC_API_KEY.",
                 })
-        _save(source, results)
+                existing_urls.add(item["url"])
+        if items:
+            _save(source, results)
         return results
 
     client = anthropic.Anthropic(api_key=api_key)
@@ -72,31 +75,40 @@ def translate_content(source: str, limit: int = 1) -> list[dict]:
     for item in items:
         console.print(f"  Translating: {item['title'][:60]}...")
         try:
-            # Translate title
-            title_resp = client.messages.create(
-                model="claude-haiku-4-5",
-                max_tokens=200,
-                system=SYSTEM_PROMPT,
-                messages=[
-                    {"role": "user", "content": f"Translate this title:\n{item['title']}"},
-                ],
-            )
-            translated_title = title_resp.content[0].text.strip()
-
-            # Translate content (chunked if needed)
             content = item.get("content", "")
+            # 제목과 본문을 한 번의 API 호출로 번역
+            prompt_parts = [f"Title: {item['title']}"]
             if content:
-                content_resp = client.messages.create(
-                    model="claude-haiku-4-5",
-                    max_tokens=4000,
-                    system=SYSTEM_PROMPT,
-                    messages=[
-                        {"role": "user", "content": f"Translate:\n{content[:4000]}"},
-                    ],
-                )
-                translated_content = content_resp.content[0].text.strip()
+                prompt_parts.append(f"\nContent:\n{content[:4000]}")
+
+            user_msg = (
+                "Translate the following into Korean. "
+                "Return the result in this exact format:\n"
+                "TITLE: <translated title>\n"
+                "CONTENT: <translated content>\n\n"
+                + "\n".join(prompt_parts)
+            )
+
+            resp = client.messages.create(
+                model="claude-haiku-4-5",
+                max_tokens=4096,
+                system=SYSTEM_PROMPT,
+                messages=[{"role": "user", "content": user_msg}],
+            )
+            resp_text = resp.content[0].text.strip()
+
+            # 응답 파싱: TITLE: / CONTENT: 구분자 사용
+            translated_title = item["title"]
+            translated_content = ""
+            if "TITLE:" in resp_text and "CONTENT:" in resp_text:
+                title_start = resp_text.index("TITLE:") + len("TITLE:")
+                content_start = resp_text.index("CONTENT:")
+                translated_title = resp_text[title_start:content_start].strip()
+                translated_content = resp_text[content_start + len("CONTENT:"):].strip()
             else:
-                translated_content = ""
+                # 구분자 없는 경우 전체를 본문으로 사용
+                translated_title = resp_text.split("\n")[0].strip()
+                translated_content = resp_text
 
             results.append({
                 "title": item["title"],
@@ -113,7 +125,8 @@ def translate_content(source: str, limit: int = 1) -> list[dict]:
                 "translated_content": f"[ERROR] {e}",
             })
 
-    _save(source, results)
+    if items:
+        _save(source, results)
     return results
 
 

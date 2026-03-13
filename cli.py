@@ -8,6 +8,12 @@ from pipeline import translate_content
 
 console = Console()
 
+# 소스별 fetcher 매핑
+_FETCHERS = {
+    "github": {"reviews": fetch_reviews, "optech": fetch_optech},
+    "http": {"reviews": scrape_reviews, "optech": scrape_optech},
+}
+
 
 @click.group()
 def cli():
@@ -32,16 +38,7 @@ def cli():
 def scrape(source: str, limit: int, mode: str):
     """Scrape content from the specified source."""
     console.print(f"[bold]Scraping: {source} (mode={mode})[/]")
-    if mode == "github":
-        if source == "reviews":
-            fetch_reviews(limit=limit)
-        elif source == "optech":
-            fetch_optech(limit=limit)
-    else:
-        if source == "reviews":
-            scrape_reviews(limit=limit)
-        elif source == "optech":
-            scrape_optech(limit=limit)
+    _FETCHERS[mode][source](limit=limit)
 
 
 @cli.command()
@@ -69,12 +66,9 @@ def translate(source: str, limit: int):
 def all(limit: int, mode: str):
     """Run full pipeline: fetch all sources, then translate."""
     console.print(f"[bold]Running full pipeline (mode={mode})...[/]")
-    if mode == "github":
-        fetch_reviews(limit=limit)
-        fetch_optech(limit=limit)
-    else:
-        scrape_reviews(limit=limit)
-        scrape_optech(limit=limit)
+    fetchers = _FETCHERS[mode]
+    fetchers["reviews"](limit=limit)
+    fetchers["optech"](limit=limit)
     translate_content("reviews", limit=limit)
     translate_content("optech", limit=limit)
     console.print("[bold green]Full pipeline complete.[/]")
