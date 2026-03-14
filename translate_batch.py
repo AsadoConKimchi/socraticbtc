@@ -19,30 +19,45 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 TRANSLATE_PROMPT = """You are a Bitcoin technical content translator (English → Korean).
 
-Translate the following Bitcoin technical content to Korean. Rules:
+The source is a raw Markdown file that may contain Jekyll/Liquid template tags and HTML. Your job is to produce clean, readable Korean Markdown.
 
-1. **Terms to keep in English**: Bitcoin technical terms (UTXO, mempool, SegWit, P2WSH, CPFP, RBF, IBD, BIP, PR, taproot, scriptPubKey, nonce, hash, block, node, wallet, etc.), code identifiers (function names, variable names, class names like CBlockIndex, CTxDestination), URLs, numbers, commit hashes, GitHub references (PR #1234, issue #567).
+## PREPROCESSING (do before translating)
+- **Strip** all Jekyll/Liquid tags: `{% ... %}`, `{%- ... -%}`, `{{ ... }}` — remove them entirely, keep only their visible text content if any.
+- **Strip** raw HTML tags (`<div>`, `<a href=...>`, `<br>`, `<p>`, etc.) — keep the inner text only.
+- **Unescape** `\\n`, `\\t` etc. into real newlines/tabs.
+- Remove YAML front matter (`---` blocks at the top) if present.
 
-2. **Natural Korean translation**: Translate naturally, not word-by-word. Use appropriate Korean technical writing style (경어체).
+## TRANSLATION RULES
 
-3. **Markdown structure** (CRITICAL):
-   - Use `##` headers to separate major sections
-   - Insert blank lines between paragraphs for readability
-   - For IRC meeting logs: format each speaker as `**nickname**: 발언 내용`
-   - Preserve and use code blocks (```), inline code (`), blockquotes (>), and lists (-, 1.)
-   - Preserve all links [text](url) and reference numbers
+**1. Keep in English (do NOT translate):**
+- Bitcoin/crypto terms: UTXO, mempool, SegWit, taproot, P2WSH, CPFP, RBF, IBD, BIP, scriptPubKey, nonce, hash, block, node, wallet, peer, fee, relay, orphan, coinbase, PSBT, descriptor, signet, mainnet, testnet
+- Code identifiers: function/variable/class names like `CBlockIndex`, `CTxDestination`, `GetBlockHash`
+- GitHub references: PR #1234, issue #567, commit hashes
+- URLs, numbers, version numbers (v26.0 etc.)
 
-4. **Section header translations**:
-   - "Notes" → "노트"
-   - "Questions" → "질문"
-   - "Meeting Log" → "회의 로그"
-   - "Summary" → "요약"
-   - "Notable changes" → "주요 변경사항"
+**2. Natural Korean (경어체):**
+Translate fluidly — not word-for-word. Use natural Korean technical writing. Avoid awkward literal translations.
 
-5. **Completeness**: Translate the ENTIRE content. Do not skip or summarize any section. Every paragraph, every bullet point, every code example must be included.
+**3. Markdown formatting (CRITICAL — this is the most important rule):**
 
-6. Reply with ONLY the translated text. No explanations, no preamble, no "Here is the translation" prefix.
+Structure the output with rich Markdown:
+- `## 섹션 제목` for major sections (Notes→노트, Questions→질문, Meeting Log→회의 로그, Summary→요약)
+- `### 소제목` for subsections
+- **Bold** key concepts and important terms on first mention: e.g. **cluster linearization**, **eviction 전략**
+- Blank line between every paragraph — never run paragraphs together
+- Bullet lists with `-` for enumerations; numbered lists `1.` for steps
+- Inline code backticks for all code, function names, RPC names, file paths: e.g. `getblocktemplate`, `src/net.cpp`
+- Code blocks (` ``` `) for multi-line code or command examples
+- Blockquotes `>` for quoted text or important callouts
+- IRC meeting logs: each line as `**nickname**: 번역된 발언` — one per line, blank line between speakers
 
+**4. Completeness:**
+Translate EVERY paragraph, bullet, and question. Do not skip or summarize anything.
+
+**5. Output:**
+Reply with ONLY the translated Markdown. No preamble, no "Here is the translation", no explanation.
+
+---
 CONTENT TO TRANSLATE:
 """
 
