@@ -17,6 +17,11 @@ import time
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
+TITLE_PROMPT = """Translate this Bitcoin article title to Korean.
+Reply with ONLY the Korean title — one line, no markdown, no explanation.
+
+Title: """
+
 TRANSLATE_PROMPT = """You are a Bitcoin technical content translator (English → Korean).
 
 The source is a raw Markdown file that may contain Jekyll/Liquid template tags and HTML. Your job is to produce clean, readable Korean Markdown.
@@ -64,16 +69,31 @@ CONTENT TO TRANSLATE:
 # 분할 번역 시 사용할 헤더 패턴
 SECTION_HEADER_RE = re.compile(r"^(#{1,3}\s+.+)$", re.MULTILINE)
 
+
+def clean_title(title):
+    """번역된 제목 후처리: 첫 줄만 추출, # prefix 제거"""
+    if not title:
+        return title
+    first_line = title.split("\n")[0].strip()
+    # ## 제목, # 제목 형태 제거
+    first_line = re.sub(r"^#+\s*", "", first_line).strip()
+    return first_line
+
+
+def fix_reference_links(text):
+    """Reference-style 링크 [text][ref] → text (참조 정의 없으므로 링크 불가)"""
+    return re.sub(r"\[([^\]]+)\]\[[^\]]*\]", r"\1", text)
+
 # 최소 번역 길이 비율 (원문 대비)
 MIN_TRANSLATION_RATIO = 0.4
 
 
-def translate_text(text, model="sonnet", max_retries=3, timeout=300):
-    """claude CLI를 사용하여 텍스트 번역"""
+def translate_text(text, model="sonnet", max_retries=3, timeout=300, prompt_override=None):
+    """claude CLI를 사용하여 텍스트 번역. prompt_override 시 해당 문자열을 그대로 사용."""
     env = os.environ.copy()
     env.pop("CLAUDECODE", None)
 
-    prompt = TRANSLATE_PROMPT + text
+    prompt = prompt_override if prompt_override is not None else TRANSLATE_PROMPT + text
 
     for attempt in range(max_retries):
         try:
@@ -250,11 +270,12 @@ def translate_daily(count=20, model="sonnet"):
         for i, item in enumerate(to_translate):
             print(f"\n  [{i+1}/{len(to_translate)}] {item['title'][:70]}...")
 
-            # 제목 번역
-            translated_title = translate_text(item["title"], model)
-            if not translated_title:
+            # 제목 번역 (전용 프롬프트 사용)
+            raw_title = translate_text(item["title"], model, prompt_override=TITLE_PROMPT + item["title"])
+            if not raw_title:
                 print(f"  SKIP: title translation failed", file=sys.stderr)
                 continue
+            translated_title = clean_title(raw_title)
 
             # 본문 번역 (긴 콘텐츠는 분할)
             translated_content = translate_long_content(item["content"], model)
@@ -269,6 +290,9 @@ def translate_daily(count=20, model="sonnet"):
                 if not valid2:
                     print(f"  SKIP: validation failed after retry ({msg2})", file=sys.stderr)
                     continue
+
+            # reference-style 링크 후처리
+            translated_content = fix_reference_links(translated_content)
 
             print(f"  OK: {len(item['content'])} → {len(translated_content)} chars ({msg})")
 
