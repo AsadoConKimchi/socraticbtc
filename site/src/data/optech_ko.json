@@ -2458,5 +2458,11 @@
     "url": "https://bitcoinops.org/en/newsletters/2026/06/12/",
     "translated_title": "Bitcoin Optech Newsletter #409",
     "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011Cc4EXNEmGHATsJdbotix6'}"
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #410",
+    "url": "https://bitcoinops.org/en/newsletters/2026/06/19/",
+    "translated_title": "Bitcoin Optech Newsletter #410",
+    "translated_content": "[ERROR] Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011CcHVMcjuxj3sAL4QsSkSP'}"
   }
 ]
