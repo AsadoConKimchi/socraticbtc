@@ -2578,5 +2578,11 @@
     "url": "https://bitcoinops.org/en/newsletters/2026/10/30/",
     "translated_title": "Bitcoin Optech Newsletter #429",
     "translated_content": "[ERROR] Error code: 403 - {'type': 'error', 'error': {'type': 'permission_error', 'message': 'OAuth authentication is currently not allowed for this organization.', 'details': {'error_code': 'oauth_not_allowed_for_organization'}}, 'request_id': 'req_011CgdLoacZD2VnhojnZtnfS'}"
+  },
+  {
+    "title": "Bitcoin Optech Newsletter #430",
+    "url": "https://bitcoinops.org/en/newsletters/2026/11/06/",
+    "translated_title": "Bitcoin Optech Newsletter #430",
+    "translated_content": "[ERROR] Error code: 403 - {'type': 'error', 'error': {'type': 'permission_error', 'message': 'OAuth authentication is currently not allowed for this organization.', 'details': {'error_code': 'oauth_not_allowed_for_organization'}}, 'request_id': 'req_011CgrceCQUxH2fMK4Yinkag'}"
   }
 ]
